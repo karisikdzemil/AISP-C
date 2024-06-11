@@ -1,16 +1,26 @@
-//
-//  main.c
-//  AISP-C
-//
-//  Created by dzemil karisik on 11.6.24..
-//
-
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
-    printf("Hello, World!\n");
-    printf("Hello, World!\n");
+
+struct node {
+    int data;
+    struct node *link;
+};
+
+int main(){
+    struct node *head = malloc(sizeof(struct node));
+    head -> data=45;
+    head -> link = NULL;
+    
+    struct node *current = malloc (sizeof(struct node));
+    head -> link = current;
+    current -> data = 85;
+    current -> link = NULL;
+    
+    struct node *third = malloc(sizeof(struct node));
+    third -> data = 21;
+    third -> link = NULL;
+    current -> link = third;
+    
     return 0;
 }
