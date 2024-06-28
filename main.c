@@ -165,7 +165,7 @@ void count_of_nodes(struct node *head){
     }
     printf("Broj cvorova liste: %d\n", count);
 }
-/// ADD AT END/////////////////
+// ADD AT END/////////////////
 void add_at_end(struct node *head, int data){
     struct node *ptr, *temp;
     ptr=head;
@@ -177,15 +177,29 @@ void add_at_end(struct node *head, int data){
     }
     ptr->link=temp;
 }
-///ADD AT BEGIN//////////
-struct node* add_at_begin(struct node *head, int d){
+//ADD AT BEGIN//////////
+    void add_at_begin(struct node **head, int d){
     struct node *ptr = malloc(sizeof(struct node));
     ptr->data=d;
     ptr->link=NULL;
     
-    ptr->link=head;
-    head=ptr;
-    return head;
+    ptr->link=*head;
+    *head=ptr;
+}
+
+//ADD AT CERTAIN/////////////////////////////
+void add_at_pos(struct node *head, int data, int pos){
+    struct node *ptr = head;
+    struct node *ptr2 = malloc(sizeof(struct node));
+    ptr2->data=data;
+    ptr2->link=NULL;
+    pos--;
+    while(pos!=1){
+        ptr = ptr->link;
+        pos--;
+    }
+    ptr2->link = ptr->link;
+    ptr->link = ptr2;
 }
 
 int main (void){
@@ -202,10 +216,12 @@ int main (void){
     current->data = 3;
     current->link = NULL;
     head -> link -> link = current;
+    int data = 67;
+    int pos=3;
     
-    int data = 5;
-    head = add_at_begin(head, data);
-    add_at_end(head, 67);
+    add_at_begin(&head, 5);
+    add_at_pos(head, data, pos);
+    add_at_end(head, 7);
     count_of_nodes(head);
     return 0;
 }
