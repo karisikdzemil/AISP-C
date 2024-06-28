@@ -151,6 +151,32 @@ struct node{
     struct node *link;
 };
 
+//COUNT and PRINT list
+void count_of_nodes(struct node *head){
+    int count = 0;
+    if(head == NULL)
+        printf("list is empty. ");
+    struct node *ptr = NULL;
+    ptr = head;
+    while(ptr != NULL){
+        count++;
+        printf("%d\n", ptr->data);
+        ptr = ptr -> link;
+    }
+    printf("Broj cvorova liste: %d\n", count);
+}
+void add_at_end(struct node *head, int data){
+    struct node *ptr, *temp;
+    ptr=head;
+    temp = malloc(sizeof(struct node));
+    temp->data = data;
+    temp->link = NULL;
+    while(ptr->link!=NULL){
+        ptr=ptr->link;
+    }
+    ptr->link=temp;
+}
+
 int main (void){
     struct node *head = (struct node *)malloc(sizeof(struct node));
     head -> data = 45;
@@ -165,6 +191,7 @@ int main (void){
     current->data = 3;
     current->link = NULL;
     head -> link -> link = current;
-    
+    add_at_end(head, 67);
+    count_of_nodes(head);
     return 0;
 }
