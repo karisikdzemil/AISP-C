@@ -221,6 +221,83 @@
 //    return 0;
 //}
 
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    int data;
+//    struct node *link;
+//};
+//
+//void count_nodes(struct node *head){
+//    int count = 0;
+//    struct node *ptr = NULL;
+//    ptr = head;
+//    while(ptr != NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->link;
+//        count++;
+//    }
+//    printf("number of nodes is: %d\n", count);
+//}
+//
+//void add_end(struct node *head, int d){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp ->data = d;
+//    temp-> link = NULL;
+//    struct node *ptr = NULL;
+//    ptr = head;
+//    while(ptr->link != NULL){
+//        ptr = ptr ->link;
+//    }
+//    ptr->link = temp;
+//}
+//void add_begin(struct node **head, int d){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->data = d;
+//    temp-> link = NULL;
+//    struct node *ptr = NULL;
+//    temp->link = *head;
+//    *head = temp;
+//}
+//void add_pos(struct node *head, int d, int pos){
+//    struct node *ptr = NULL;
+//    ptr = head;
+//    struct node *ptr2 = malloc(sizeof(struct node));
+//    ptr2->data = d;
+//    ptr2->link = NULL;
+//    
+//    pos--;
+//    while(pos!=1){
+//        ptr=ptr->link;
+//        pos--;
+//    }
+//    ptr2->link = ptr->link;
+//    ptr->link = ptr2;
+//}
+//int main (){
+//    struct node *head = malloc(sizeof(struct node));
+//    head->data = 20;
+//    head->link = NULL;
+//    
+//    struct node *current = malloc(sizeof(struct node));
+//    current->data = 30;
+//    current->link = NULL;
+//    head->link = current;
+//    
+//    current = malloc(sizeof(struct node));
+//    current->data = 40;
+//    current->link = NULL;
+//    head ->link->link = current;
+//    
+//    add_begin(&head, 10);
+//    add_end(head, 50);
+//    add_pos(head, 25, 3);
+//    count_nodes(head);
+//
+//    return 0;
+//}
+    
 // ISPOCETKA/////////////////////////////////////////
 
 #include <stdio.h>
