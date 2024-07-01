@@ -297,7 +297,7 @@
 //
 //    return 0;
 //}
-    
+        
 // ISPOCETKA/////////////////////////////////////////
 
 #include <stdio.h>
@@ -376,9 +376,9 @@ int main (void){
     int data = 67;
     int pos=3;
     
-    add_at_begin(&head, 5);
-    add_at_pos(head, data, pos);
-    add_at_end(head, 7);
-    count_of_nodes(head);
+//    add_at_begin(&head, 5);
+//    add_at_pos(head, data, pos);
+//    add_at_end(head, 7);
+//    count_of_nodes(head);
     return 0;
 }
