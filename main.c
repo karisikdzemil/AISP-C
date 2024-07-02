@@ -359,6 +359,18 @@ void add_at_pos(struct node *head, int data, int pos){
     ptr->link = ptr2;
 }
 
+struct node *del_first(struct node *head){
+    if(head == NULL){
+        printf("List is alredy empty!");
+    }else{
+        struct node *temp = head;
+        head = head->link;
+        free(temp);
+        temp = NULL;
+    }
+    return head;
+}
+
 int main (void){
     struct node *head = (struct node *)malloc(sizeof(struct node));
     head -> data = 45;
@@ -376,9 +388,11 @@ int main (void){
     int data = 67;
     int pos=3;
     
-//    add_at_begin(&head, 5);
-//    add_at_pos(head, data, pos);
-//    add_at_end(head, 7);
-//    count_of_nodes(head);
+    add_at_begin(&head, 5);
+    add_at_pos(head, data, pos);
+    add_at_end(head, 7);
+    head = del_first(head);
+    
+    count_of_nodes(head);
     return 0;
 }
