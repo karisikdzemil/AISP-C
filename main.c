@@ -311,16 +311,17 @@ struct node{
 //COUNT and PRINT list
 void count_of_nodes(struct node *head){
     int count = 0;
-    if(head == NULL)
-        printf("list is empty. ");
-    struct node *ptr = NULL;
-    ptr = head;
-    while(ptr != NULL){
-        count++;
-        printf("%d\n", ptr->data);
-        ptr = ptr -> link;
-    }
-    printf("Broj cvorova liste: %d\n", count);
+    if(head == NULL){
+        printf("list is empty. \n");
+    }else{
+        struct node *ptr = NULL;
+        ptr = head;
+        while(ptr != NULL){
+            count++;
+            printf("%d\n", ptr->data);
+            ptr = ptr -> link;
+        }
+        printf("Broj cvorova liste: %d\n", count);}
 }
 // ADD AT END/////////////////
 void add_at_end(struct node *head, int data){
@@ -374,6 +375,28 @@ struct node *del_first(struct node *head){
 
 //DELETING THE LAST NODE/////////////////
 
+//void del_last (struct node *head){
+//    if(head == NULL){
+//        printf("List is empty!");
+//    }else if(head->link == NULL){
+//        free(head);
+//        head = NULL;
+//    }else{
+//        struct node *temp = head;
+//        struct node *temp2 = head;
+//        
+//        while(temp->link != NULL){
+//            temp2 = temp;
+//            temp = temp->link;
+//        }
+//        temp2->link = NULL;
+//        free(temp);
+//        temp = NULL;
+//        }
+//}
+
+//DELETING THE FIRST NODE USING SINGLE POINTER////////////////////
+
 void del_last (struct node *head){
     if(head == NULL){
         printf("List is empty!");
@@ -382,17 +405,41 @@ void del_last (struct node *head){
         head = NULL;
     }else{
         struct node *temp = head;
-        struct node *temp2 = head;
         
-        while(temp->link != NULL){
-            temp2 = temp;
+        while(temp->link->link != NULL){
             temp = temp->link;
         }
-        temp2->link = NULL;
-        free(temp);
-        temp = NULL;
+        free(temp->link);
+        temp->link = NULL;
         }
 }
+
+//DELETING THE NODE AT A PARTICULAR POSITION///////////////////
+
+void del_pos(struct node **head, int pos){
+    struct node *previous = *head;
+    struct node *current = *head;
+    if (*head == NULL){
+        printf("List is already empty!");
+    }else if(pos == 1){
+        *head = current->link;
+        free(current);
+        current = NULL;
+    }else{
+        while(pos!=1){
+            previous=current;
+            current = current->link;
+            pos--;
+        }
+        previous->link = current->link;
+        free(current);
+        current = NULL;
+    }
+    
+}
+
+
+
 int main (void){
     struct node *head = (struct node *)malloc(sizeof(struct node));
     head -> data = 45;
@@ -415,6 +462,8 @@ int main (void){
     
     head = del_first(head);
     del_last(head);
+    del_pos(&head, 2);
+    
     count_of_nodes(head);
     return 0;
 }
