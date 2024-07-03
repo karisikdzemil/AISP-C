@@ -438,7 +438,15 @@ void del_pos(struct node **head, int pos){
     
 }
 
-
+struct node *del_list(struct node *head){
+    struct node *temp = head;
+    while(temp!=NULL){
+        temp=temp->link;
+        free(head);
+        head=temp;
+    }
+    return head;
+}
 
 int main (void){
     struct node *head = (struct node *)malloc(sizeof(struct node));
@@ -463,6 +471,7 @@ int main (void){
     head = del_first(head);
     del_last(head);
     del_pos(&head, 2);
+    head = del_list(head);
     
     count_of_nodes(head);
     return 0;
