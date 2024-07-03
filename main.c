@@ -448,6 +448,22 @@ struct node *del_list(struct node *head){
     return head;
 }
 
+//REVERSE A SINGLE LINKED LIST /////////////////////////
+
+struct node *reverse(struct node *head){
+    struct node *prev = NULL;
+    struct node *next = NULL;
+    
+    while (head != NULL){
+        next = head->link;
+        head->link = prev;
+        prev = head;
+        head = next;
+    }
+    head = prev;
+    return head;
+}
+
 int main (void){
     struct node *head = (struct node *)malloc(sizeof(struct node));
     head -> data = 45;
@@ -471,7 +487,8 @@ int main (void){
     head = del_first(head);
     del_last(head);
     del_pos(&head, 2);
-    head = del_list(head);
+//    head = del_list(head);
+    head = reverse(head);
     
     count_of_nodes(head);
     return 0;
