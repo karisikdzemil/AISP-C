@@ -545,6 +545,26 @@ struct node *addAtEnd(struct node *head, int data){
     return head;
 }
 
+struct node *addAfterPos(struct node *head, int data, int position){
+    struct node *NewP = NULL;
+    struct node *temp = head;
+    struct node *temp2 = NULL;
+    
+    NewP = addToEmpty(NewP, data);
+    
+    while(position != 1){
+        temp = temp->next;
+        position--;
+    }
+    temp2 = temp->next;
+    temp->next = NewP;
+    temp2->prev = NewP;
+    NewP->prev = temp;
+    NewP->next = temp2;
+    
+    return head;
+    
+}
 int main(void){
     
     struct node *head = NULL;
@@ -552,6 +572,7 @@ int main(void){
     head = addToEmpty(head, 45);
     head = addAtBeg(head, 34);
     head = addAtEnd(head, 9);
+    head = addAfterPos(head, 7, 2);
     
     struct node *ptr = NULL;
     ptr = head;
