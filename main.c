@@ -594,16 +594,36 @@ struct node *addBeforePos(struct node *head, int data, int position){
     return head;
 }
 
+struct node *createList(struct node *head){
+    int n, i, data;
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    
+    if(n==0)
+        return head;
+    
+    printf("Enter the element for the node 1: ");
+    scanf("%d", &data);
+    head = addToEmpty(head, data);
+    
+    for(i=1;i<n;i++){
+        printf("Enter the element for the node %d: ", i+1);
+        scanf("%d", &data);
+        head = addAtEnd(head, data);
+    }
+    return head;
+}
+
 int main(void){
     
     struct node *head = NULL;
     
-    head = addToEmpty(head, 45);
-    head = addAtBeg(head, 34);
-    head = addAtEnd(head, 9);
-//    head = addAfterPos(head, 7, 2);
-    head = addBeforePos(head, 25, 3);
-    
+//    head = addToEmpty(head, 45);
+//    head = addAtBeg(head, 34);
+//    head = addAtEnd(head, 9);
+////    head = addAfterPos(head, 7, 2);
+//    head = addBeforePos(head, 25, 3);
+    head = createList(head);
     struct node *ptr = NULL;
     ptr = head;
     while(ptr!=NULL){
