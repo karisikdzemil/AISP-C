@@ -614,24 +614,38 @@ struct node *createList(struct node *head){
     return head;
 }
 
-int main(void){
-    
-    struct node *head = NULL;
-    
-//    head = addToEmpty(head, 45);
-//    head = addAtBeg(head, 34);
-//    head = addAtEnd(head, 9);
-////    head = addAfterPos(head, 7, 2);
-//    head = addBeforePos(head, 25, 3);
-    head = createList(head);
+struct node *delfirst(struct node *head){
+    head = head->next;
+    free(head->prev);
+    head->prev = NULL;
+    return head;
+}
+
+void print (struct node *head){
     struct node *ptr = NULL;
     ptr = head;
     while(ptr!=NULL){
         printf("%d\n", ptr->data);
         ptr = ptr->next;
     }
+}
+int main(void){
+    
+    struct node *head = NULL;
+    
+    head = addToEmpty(head, 34);
+//    head = addAtBeg(head, 34);
+    head = addAtEnd(head, 45);
+    head = addAtEnd(head, 9);
+//    head = addAfterPos(head, 7, 2);
+//    head = addBeforePos(head, 25, 3);
+//    head = createList(head);
+  
+    printf("Before Deletion: \n");
+    print(head);
+    head = delfirst(head);
+    printf("After delition: \n");
+    print(head);
 
     return 0;
 }
-
-
