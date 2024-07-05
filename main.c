@@ -749,20 +749,47 @@ struct node *addAfterPos(struct node *tail, int data, int pos){
     return tail;
 }
 
+struct node *createList(struct node *tail){
+    int i, n, data;
+    printf("Enter the number of nodes of the linked list: ");
+    scanf("%d", &n);
+    
+    if(n==0)
+        return tail;
+    printf("Enter the element 1: ");
+    scanf("%d", &data);
+    tail = addToEmpty(data);
+    for(i=1;i<n;i++){
+        printf("Enter the element %d: ", i+1);
+        scanf("%d", &data);
+        tail = addAtEnd(tail, data);
+    }
+    return tail;
+}
+
 void print(struct node *tail){
-    struct node *p = tail->next;
-    do {
-        printf("%d\n", p->data);
-        p = p->next;
-    } while (p!=tail->next);
+    if(tail == NULL){
+        printf("No node in the list.\n");
+    }else{
+        struct node *p = tail->next;
+        do {
+            printf("%d\n", p->data);
+            p = p->next;
+        } while (p!=tail->next);
+    }
 }
 
 int main (void){
-    struct node* tail;
-    tail = addToEmpty(45);
-    tail = addAtBegin(tail, 34);
-    tail = addAtEnd(tail, 56);
-    tail = addAfterPos(tail, 77, 3);
+    struct node* tail = NULL;
+//    tail = addToEmpty(45);
+//    tail = addAtBegin(tail, 34);
+//    tail = addAtEnd(tail, 56);
+//    tail = addAfterPos(tail, 77, 3);
+    
+//    tail = createList(tail);
+    
+    
+    
     print(tail);
     
     return 0;
