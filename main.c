@@ -731,6 +731,24 @@ struct node *addAtEnd(struct node *tail, int data){
     return tail;
 }
 
+struct node *addAfterPos(struct node *tail, int data, int pos){
+    struct node *newP = malloc(sizeof(struct node));
+    newP->data = data;
+    newP->next = NULL;
+    
+    struct node *p = tail->next;
+    while(pos!=1){
+        p = p->next;
+        pos--;
+    }
+    newP->next = p->next;
+    p->next = newP;
+     if(p == tail)
+         tail = tail->next;
+
+    return tail;
+}
+
 void print(struct node *tail){
     struct node *p = tail->next;
     do {
@@ -743,8 +761,8 @@ int main (void){
     struct node* tail;
     tail = addToEmpty(45);
     tail = addAtBegin(tail, 34);
-    tail = addAtEnd(tail, 6);
     tail = addAtEnd(tail, 56);
+    tail = addAfterPos(tail, 77, 3);
     print(tail);
     
     return 0;
