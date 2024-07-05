@@ -710,7 +710,7 @@ struct node *addToEmpty(int data){
     temp->next = temp;
     return temp;
 }
-struct node *addToBegin(struct node *tail, int data){
+struct node *addAtBegin(struct node *tail, int data){
     struct node *temp = malloc(sizeof(struct node));
     temp->data = data;
     temp->next = NULL;
@@ -719,6 +719,18 @@ struct node *addToBegin(struct node *tail, int data){
     tail->next = temp;
     return tail;
 }
+
+struct node *addAtEnd(struct node *tail, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->data = data;
+    temp->next = NULL;
+    
+    temp->next = tail->next;
+    tail->next = temp;
+    tail = tail->next;
+    return tail;
+}
+
 void print(struct node *tail){
     struct node *p = tail->next;
     do {
@@ -729,8 +741,10 @@ void print(struct node *tail){
 
 int main (void){
     struct node* tail;
-    tail = addToEmpty(34);
-    tail = addToBegin(tail, 43);
+    tail = addToEmpty(45);
+    tail = addAtBegin(tail, 34);
+    tail = addAtEnd(tail, 6);
+    tail = addAtEnd(tail, 56);
     print(tail);
     
     return 0;
