@@ -498,199 +498,240 @@
 
 //DOUBLY LINKED LIST//////////////////////
 
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node{
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//
+//struct node *addToEmpty(struct node *head, int data){
+//    struct node * temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    head = temp;
+//    return head;
+//}
+//
+//struct node *addAtBeg(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    
+//    temp->next = head;
+//    head->prev = temp;
+//    head = temp;
+//    
+//    return head;
+//}
+//
+//struct node *addAtEnd(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    struct node *tp = NULL;
+//    tp = head;
+//    while(tp->next!=NULL){
+//        tp = tp->next;
+//    }
+//    tp->next = temp;
+//    temp->prev = tp;
+//    
+//    return head;
+//}
+//
+//struct node *addAfterPos(struct node *head, int data, int position){
+//    struct node *NewP = NULL;
+//    struct node *temp = head;
+//    struct node *temp2 = NULL;
+//    
+//    NewP = addToEmpty(NewP, data);
+//    
+//    while(position != 1){
+//        temp = temp->next;
+//        position--;
+//    }
+//    if(temp->next == NULL){
+//        temp->next = NewP;
+//        NewP->prev = temp;
+//    }else{
+//        temp2 = temp->next;
+//        temp->next = NewP;
+//        temp2->prev = NewP;
+//        NewP->prev = temp;
+//        NewP->next = temp2;
+//    }
+//    return head;
+//}
+//
+//struct node *addBeforePos(struct node *head, int data, int position){
+//    struct node *NewP = NULL;
+//    struct node *temp = head;
+//    struct node *temp2 = NULL;
+//    
+//    NewP = addToEmpty(NewP, data);
+//    
+//    while(position>2){
+//        temp=temp->next;
+//        position--;
+//    }
+//    if(position == 1){
+//        NewP = addAtBeg(NewP, data);
+//    }
+//    else{
+//        temp2 = temp->next;
+//        temp->next = NewP;
+//        temp2->prev = NewP;
+//        NewP->prev = temp;
+//        NewP->next = temp2;
+//        
+//    }
+//    return head;
+//}
+//
+//struct node *createList(struct node *head){
+//    int n, i, data;
+//    printf("Enter the number of nodes: ");
+//    scanf("%d", &n);
+//    
+//    if(n==0)
+//        return head;
+//    
+//    printf("Enter the element for the node 1: ");
+//    scanf("%d", &data);
+//    head = addToEmpty(head, data);
+//    
+//    for(i=1;i<n;i++){
+//        printf("Enter the element for the node %d: ", i+1);
+//        scanf("%d", &data);
+//        head = addAtEnd(head, data);
+//    }
+//    return head;
+//}
+//
+//struct node *delfirst(struct node *head){
+//    head = head->next;
+//    free(head->prev);
+//    head->prev = NULL;
+//    return head;
+//}
+//struct node *delLast(struct node *head){
+//    struct node *temp, *temp2;
+//    temp = head;
+//    while(temp->next!=NULL)
+//        temp = temp->next;
+//    temp2 = temp->prev;
+//    temp2->next = NULL;
+//    free(temp);
+//    return head;
+//    
+//}
+//
+//struct node *delInter(struct node *head, int pos){
+//    struct node *temp = head;
+//    struct node *temp2;
+//    while(pos>1){
+//        temp = temp->next;
+//        pos--;
+//    }
+//    temp2 = temp->prev;
+//    temp2->next = temp->next;
+//    temp->next->prev=temp2;
+//    free(temp);
+//    temp=NULL;
+//    return head;
+//}
+//
+//struct node *reverse(struct node *head){
+//    struct node *ptr1 = head;
+//    struct node *ptr2 = ptr1->next;
+//    
+//    ptr1->next = NULL;
+//    ptr1->prev = ptr2;
+//    
+//    while(ptr2!=NULL){
+//        ptr2->prev = ptr2->next;
+//        ptr2->next = ptr1;
+//        ptr1 = ptr2;
+//        ptr2 = ptr2->prev;
+//    }
+//    head = ptr1;
+//    return head;
+//    
+//}
+//
+//void print (struct node *head){
+//    struct node *ptr = NULL;
+//    ptr = head;
+//    while(ptr!=NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->next;
+//    }
+//}
+//int main(void){
+//    
+//    struct node *head = NULL;
+//    
+//    head = addToEmpty(head, 34);
+////    head = addAtBeg(head, 34);
+//    head = addAtEnd(head, 45);
+//    head = addAtEnd(head, 9);
+////    head = addAfterPos(head, 7, 2);
+////    head = addBeforePos(head, 25, 3);
+////    head = createList(head);
+//  
+//    printf("Before revesing: \n");
+//    print(head);
+//    head = reverse(head);
+//    printf("After reversing: \n");
+//    print(head);
+//
+//    return 0;
+//}
+
+//END OF DOUBLY LINKED LIST /////////////////
+//CIRCULAR SINGLE LINKED LIST ////////////////////////
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
-    struct node *prev;
+struct node {
     int data;
     struct node *next;
 };
-
-struct node *addToEmpty(struct node *head, int data){
-    struct node * temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-    head = temp;
-    return head;
-}
-
-struct node *addAtBeg(struct node *head, int data){
+struct node *addToEmpty(int data){
     struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
     temp->data = data;
-    temp->next = NULL;
-    
-    temp->next = head;
-    head->prev = temp;
-    head = temp;
-    
-    return head;
+    temp->next = temp;
+    return temp;
 }
-
-struct node *addAtEnd(struct node *head, int data){
+struct node *addToBegin(struct node *tail, int data){
     struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
     temp->data = data;
     temp->next = NULL;
-    struct node *tp = NULL;
-    tp = head;
-    while(tp->next!=NULL){
-        tp = tp->next;
-    }
-    tp->next = temp;
-    temp->prev = tp;
     
-    return head;
+    temp->next = tail->next;
+    tail->next = temp;
+    return tail;
+}
+void print(struct node *tail){
+    struct node *p = tail->next;
+    do {
+        printf("%d\n", p->data);
+        p = p->next;
+    } while (p!=tail->next);
 }
 
-struct node *addAfterPos(struct node *head, int data, int position){
-    struct node *NewP = NULL;
-    struct node *temp = head;
-    struct node *temp2 = NULL;
+int main (void){
+    struct node* tail;
+    tail = addToEmpty(34);
+    tail = addToBegin(tail, 43);
+    print(tail);
     
-    NewP = addToEmpty(NewP, data);
-    
-    while(position != 1){
-        temp = temp->next;
-        position--;
-    }
-    if(temp->next == NULL){
-        temp->next = NewP;
-        NewP->prev = temp;
-    }else{
-        temp2 = temp->next;
-        temp->next = NewP;
-        temp2->prev = NewP;
-        NewP->prev = temp;
-        NewP->next = temp2;
-    }
-    return head;
-}
-
-struct node *addBeforePos(struct node *head, int data, int position){
-    struct node *NewP = NULL;
-    struct node *temp = head;
-    struct node *temp2 = NULL;
-    
-    NewP = addToEmpty(NewP, data);
-    
-    while(position>2){
-        temp=temp->next;
-        position--;
-    }
-    if(position == 1){
-        NewP = addAtBeg(NewP, data);
-    }
-    else{
-        temp2 = temp->next;
-        temp->next = NewP;
-        temp2->prev = NewP;
-        NewP->prev = temp;
-        NewP->next = temp2;
-        
-    }
-    return head;
-}
-
-struct node *createList(struct node *head){
-    int n, i, data;
-    printf("Enter the number of nodes: ");
-    scanf("%d", &n);
-    
-    if(n==0)
-        return head;
-    
-    printf("Enter the element for the node 1: ");
-    scanf("%d", &data);
-    head = addToEmpty(head, data);
-    
-    for(i=1;i<n;i++){
-        printf("Enter the element for the node %d: ", i+1);
-        scanf("%d", &data);
-        head = addAtEnd(head, data);
-    }
-    return head;
-}
-
-struct node *delfirst(struct node *head){
-    head = head->next;
-    free(head->prev);
-    head->prev = NULL;
-    return head;
-}
-struct node *delLast(struct node *head){
-    struct node *temp, *temp2;
-    temp = head;
-    while(temp->next!=NULL)
-        temp = temp->next;
-    temp2 = temp->prev;
-    temp2->next = NULL;
-    free(temp);
-    return head;
-    
-}
-
-struct node *delInter(struct node *head, int pos){
-    struct node *temp = head;
-    struct node *temp2;
-    while(pos>1){
-        temp = temp->next;
-        pos--;
-    }
-    temp2 = temp->prev;
-    temp2->next = temp->next;
-    temp->next->prev=temp2;
-    free(temp);
-    temp=NULL;
-    return head;
-}
-
-struct node *reverse(struct node *head){
-    struct node *ptr1 = head;
-    struct node *ptr2 = ptr1->next;
-    
-    ptr1->next = NULL;
-    ptr1->prev = ptr2;
-    
-    while(ptr2!=NULL){
-        ptr2->prev = ptr2->next;
-        ptr2->next = ptr1;
-        ptr1 = ptr2;
-        ptr2 = ptr2->prev;
-    }
-    head = ptr1;
-    return head;
-    
-}
-
-void print (struct node *head){
-    struct node *ptr = NULL;
-    ptr = head;
-    while(ptr!=NULL){
-        printf("%d\n", ptr->data);
-        ptr = ptr->next;
-    }
-}
-int main(void){
-    
-    struct node *head = NULL;
-    
-    head = addToEmpty(head, 34);
-//    head = addAtBeg(head, 34);
-    head = addAtEnd(head, 45);
-    head = addAtEnd(head, 9);
-//    head = addAfterPos(head, 7, 2);
-//    head = addBeforePos(head, 25, 3);
-//    head = createList(head);
-  
-    printf("Before revesing: \n");
-    print(head);
-    head = reverse(head);
-    printf("After reversing: \n");
-    print(head);
-
     return 0;
 }
-
