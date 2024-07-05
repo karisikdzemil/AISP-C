@@ -487,7 +487,7 @@
 //    head = del_first(head);
 //    del_last(head);
 //    del_pos(&head, 2);
-////    head = del_list(head);
+//    head = del_list(head);
 //    head = reverse(head);
 //    
 //    count_of_nodes(head);
@@ -620,6 +620,50 @@ struct node *delfirst(struct node *head){
     head->prev = NULL;
     return head;
 }
+struct node *delLast(struct node *head){
+    struct node *temp, *temp2;
+    temp = head;
+    while(temp->next!=NULL)
+        temp = temp->next;
+    temp2 = temp->prev;
+    temp2->next = NULL;
+    free(temp);
+    return head;
+    
+}
+
+struct node *delInter(struct node *head, int pos){
+    struct node *temp = head;
+    struct node *temp2;
+    while(pos>1){
+        temp = temp->next;
+        pos--;
+    }
+    temp2 = temp->prev;
+    temp2->next = temp->next;
+    temp->next->prev=temp2;
+    free(temp);
+    temp=NULL;
+    return head;
+}
+
+struct node *reverse(struct node *head){
+    struct node *ptr1 = head;
+    struct node *ptr2 = ptr1->next;
+    
+    ptr1->next = NULL;
+    ptr1->prev = ptr2;
+    
+    while(ptr2!=NULL){
+        ptr2->prev = ptr2->next;
+        ptr2->next = ptr1;
+        ptr1 = ptr2;
+        ptr2 = ptr2->prev;
+    }
+    head = ptr1;
+    return head;
+    
+}
 
 void print (struct node *head){
     struct node *ptr = NULL;
@@ -641,11 +685,12 @@ int main(void){
 //    head = addBeforePos(head, 25, 3);
 //    head = createList(head);
   
-    printf("Before Deletion: \n");
+    printf("Before revesing: \n");
     print(head);
-    head = delfirst(head);
-    printf("After delition: \n");
+    head = reverse(head);
+    printf("After reversing: \n");
     print(head);
 
     return 0;
 }
+
