@@ -953,6 +953,78 @@ struct node *addAtEnd(struct node *tail, int data){
     return tail;
 }
 
+struct node *addAfterPos(struct node *tail, int data, int pos){
+    struct node *newP = malloc(sizeof(struct node));
+    newP->prev = NULL;
+    newP->data = data;
+    newP->next = NULL;
+    
+    if(tail == NULL)
+        return newP;
+    
+    struct node *temp = tail->next;
+    while(pos>1){
+        temp = temp->next;
+        pos--;
+    }
+    newP->next = temp->next;
+    newP->prev = temp;
+    temp->next->prev = newP;
+    temp->next = newP;
+    if(temp == tail)
+        tail = tail->next;
+    
+    return tail;
+}
+
+struct node *delFirst(struct node *tail){
+    struct node *temp = tail->next;
+    if(tail==NULL)
+        return tail;
+    if(temp == tail){
+        free(tail);
+        tail = NULL;
+        return tail;
+    }
+    tail->next = temp->next;
+    temp->next->prev = tail;
+    free(temp);
+    temp = NULL;
+    
+    return tail;
+}
+
+struct node *delLast(struct node *tail){
+    struct node *temp;
+    temp = tail->prev;
+    if(tail==NULL)
+        return tail;
+    if(temp == tail){
+        free(tail);
+        tail = NULL;
+        return tail;
+    }
+    temp->next = tail->next;
+    tail->next->prev = temp;
+    free(tail);
+    tail = temp;
+    return tail;
+    
+}
+struct node *delInter(struct node *tail, int pos){
+    struct node *temp = tail->next;
+    while(pos>1){
+        temp = temp->next;
+        pos--;
+    }
+    struct node *temp2 = temp->prev;
+    temp2->next = temp->next;
+    temp->next->prev = temp2;
+    free(temp);
+    if(temp==tail)
+        tail = temp2;
+    return  tail;
+}
 
 void print(struct node *tail){
     struct node *temp = tail->next;
@@ -966,8 +1038,13 @@ void print(struct node *tail){
 int main(void){
     struct node *tail = NULL;
     tail = addAtEmpty(12);
-    tail = addAtBegin(tail, 24);
+    tail = addAtEnd(tail, 24);
     tail = addAtEnd(tail, 67);
+//    tail = addAfterPos(tail, 78, 2);
+    
+      tail = delInter(tail, 2);
+//    tail = delFirst(tail);
+//    tail = delLast(tail);
     print(tail);
     return 0;
 }
