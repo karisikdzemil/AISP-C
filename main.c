@@ -822,7 +822,32 @@ struct node *delInter(struct node *tail, int pos){
     free(temp2);
     temp2 = NULL;
     return tail;
-        
+}
+
+int searchEl(struct node *tail, int element){
+    struct node *temp;
+    int index = 0;
+    
+    if(tail == NULL)
+        return -2;
+    temp = tail->next;
+    do{
+        if(temp->data==element)
+            return index;
+        temp = temp->next;
+        index++;
+    }while(temp!=tail->next);
+        return -1;
+}
+
+void countEl(struct node *tail){
+    struct node *temp = tail->next;
+    int count = 1;
+    while (temp != tail){
+        count++;
+        temp = temp->next;
+    }
+    printf("There are %d elements in the list.\n", count);
 }
 
 void print(struct node *tail){
@@ -839,18 +864,31 @@ void print(struct node *tail){
 
 int main (void){
     struct node* tail = NULL;
-//    tail = addToEmpty(45);
-//    tail = addAtBegin(tail, 34);
-//    tail = addAtEnd(tail, 56);
-//    tail = addAfterPos(tail, 77, 3);
+    int element;
+    tail = addToEmpty(45);
+    tail = addAtBegin(tail, 34);
+    tail = addAtEnd(tail, 56);
+    tail = addAfterPos(tail, 77, 3);
     
-    tail = createList(tail);
-    printf("Before deleteing:\n");
-    print(tail);
-    printf("After deleting:\n");
+    printf("Enter the element: ");
+    scanf("%d", &element);
+    int index = searchEl(tail, element);
+    
+    if(index == -1){
+        printf("Element not found!\n");
+    }if(index == -2){
+        printf("Linked list is empty!\n");
+    }else{
+        printf("Element %d is at index %d.\n", element, index);
+    }
+//    tail = createList(tail);
+//    printf("Before deleteing:\n");
+//    print(tail);
+//    printf("After deleting:\n");
 //    tail = delLast(tail);
 //    tail = delFirst(tail);
-    tail = delInter(tail, 3);
+//    tail = delInter(tail, 3);
+//    countEl(tail);
     
     
     print(tail);
