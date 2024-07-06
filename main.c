@@ -767,6 +767,64 @@ struct node *createList(struct node *tail){
     return tail;
 }
 
+struct node *delFirst(struct node *tail){
+    struct node *temp = tail->next;
+    if(temp==NULL)
+        return tail;
+    if(temp==tail){
+        free(tail);
+        tail=NULL;
+        return tail;
+    }else{
+        tail->next = temp->next;
+        free(temp);
+        temp = NULL;
+        return tail;
+    }
+}
+
+struct node *delLast(struct node *tail){
+    if (tail == NULL)
+        return tail;
+    if(tail->next == NULL){
+        free(tail);
+        tail = NULL;
+        return tail;
+    }else{
+        struct node *temp = tail->next;
+        while(temp->next != tail){
+            temp = temp->next;
+        }
+        temp->next = tail->next;
+        free(tail);
+        tail = temp;
+        return tail;
+    }
+}
+
+struct node *delInter(struct node *tail, int pos){
+    if(tail==NULL)
+        return tail;
+    struct node *temp = tail->next;
+    if(tail->next == tail){
+        free(tail);
+        tail = NULL;
+        return tail;
+    }
+    while(pos>2){
+        temp = temp->next;
+        pos--;
+    }
+    struct node *temp2 = temp->next;
+    temp->next = temp2->next;
+    if(temp2 == tail)
+        tail = temp;
+    free(temp2);
+    temp2 = NULL;
+    return tail;
+        
+}
+
 void print(struct node *tail){
     if(tail == NULL){
         printf("No node in the list.\n");
@@ -786,8 +844,13 @@ int main (void){
 //    tail = addAtEnd(tail, 56);
 //    tail = addAfterPos(tail, 77, 3);
     
-//    tail = createList(tail);
-    
+    tail = createList(tail);
+    printf("Before deleteing:\n");
+    print(tail);
+    printf("After deleting:\n");
+//    tail = delLast(tail);
+//    tail = delFirst(tail);
+    tail = delInter(tail, 3);
     
     
     print(tail);
