@@ -297,6 +297,113 @@
 //
 //    return 0;
 //}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct {
+    int *colection;
+    int capacity;
+    int size;
+}Stack;
+
+Stack *createStack(int capacity){
+    if(capacity <= 0) return NULL;
+    
+    Stack *stack = malloc(sizeof(Stack));
+    if(stack == NULL) return NULL;
+    
+    stack->colection = malloc(sizeof(int) * capacity);
+    
+    if(stack->colection == NULL){
+        free(stack);
+        return NULL;
+    }
+    stack->capacity = capacity;
+    stack->size = 0;
+    return stack;
+}
+    
+void destryStack (Stack *stack){
+    if(stack->colection!=NULL){
+        free(stack->colection);
+        free(stack);
+    }
+}
+
+bool isFull(Stack *stack){
+    return stack->capacity==stack->size;
+}
+
+bool isEmpty(Stack *stack){
+    return stack->size == 0;
+}
+bool push(Stack *stack, int item){
+    if(isFull(stack)) return false;
+    stack->colection[stack->size] = item;
+    stack->size++;
+    return true;
+}
+bool pop (Stack *stack, int *item){
+    if(isEmpty(stack)) return false;
+    stack->size--;
+    *item = stack->colection[stack->size];
+    
+    return true;
+}
+
+bool peek (Stack *stack, int *item){
+    if(isEmpty(stack)) return false;
+    
+    *item = stack->colection[stack->size-1];
+    return true;
+}
+
+int main (void){
+    Stack *stack = createStack(5);
+    if(stack == NULL){
+        printf("Error creating stack!\n");
+        return 1;
+    }
+    
+    if(isEmpty(stack)) printf("Stack is empty!\n");
+    
+    push(stack, 7);
+    printf("Size of stack: %d\n", stack->size);
+    push(stack, 3);
+    push(stack, 4);
+    push(stack, 2);
+    push(stack, 9);
+
+    if(isFull(stack)) printf("Stack is full!\n");
+    printf("Size of stack: %d\n", stack->size);
+
+    bool try_push = push(stack, 3);
+    if(try_push == false) printf("Push failed!\n");
+    
+    int peek_value = 0;
+    peek(stack, &peek_value);
+    printf("The peek value is: %d\n", peek_value);
+    
+    int pop_val = 0;
+    for(int i=0;i<5;i++){
+        pop(stack, &pop_val);
+        printf("The poped value is: %d\n", pop_val);
+    }
+    
+    bool try_pop = pop(stack, &pop_val);
+    if(try_pop == false) printf("Pop is failed!\n");
+    
+    bool try_peek = peek(stack, &peek_value);
+    if(try_peek == false) printf("peek is failed!\n");
+    
+    
+    destryStack(stack);
+    
+    
+    return 0;
+}
         
 // ISPOCETKA/////////////////////////////////////////
 
@@ -1052,124 +1159,124 @@
 //STACK/////// DATA STERUCTURE////////////
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-// Struktura za stek
-typedef struct {
-    int *collection;  // pokazivač na niz
-    int capacity;     // kapacitet steka
-    int size;         // trenutna veličina steka
-} Stack;
-
-// Funkcija za kreiranje steka
-Stack *createStack(int capacity) {
-    if (capacity <= 0) return NULL;
-    
-    Stack *stack = (Stack *)malloc(sizeof(Stack));
-    if (stack == NULL) return NULL;
-    
-    stack->collection = (int *)malloc(sizeof(int) * capacity);
-    if (stack->collection == NULL) {
-        free(stack);
-        return NULL;
-    }
-    stack->capacity = capacity;
-    stack->size = 0;
-    
-    return stack;
-}
-
-// Funkcija za uništavanje steka
-void destroyStack(Stack *stack) {
-    if (stack != NULL) {
-        free(stack->collection);
-        free(stack);
-    }
-}
-
-// Funkcija koja proverava da li je stek pun
-bool isFull(Stack *stack) {
-    return stack->size == stack->capacity;
-}
-
-// Funkcija koja proverava da li je stek prazan
-bool isEmpty(Stack *stack) {
-    return stack->size == 0;
-}
-
-// Funkcija za dodavanje elementa na stek
-bool push(Stack *stack, int item) {
-    if (isFull(stack)) return false;
-    
-    stack->collection[stack->size] = item;
-    stack->size++;
-    
-    return true;
-}
-
-// Funkcija za uklanjanje elementa sa steka
-bool pop(Stack *stack, int *item) {
-    if (isEmpty(stack)) return false;
-    
-    stack->size--;
-    *item = stack->collection[stack->size];
-    
-    return true;
-}
-
-// Funkcija za pregled elementa na vrhu steka
-bool peek(Stack *stack, int *item) {
-    if (isEmpty(stack)) return false;
-    
-    *item = stack->collection[stack->size - 1];
-    
-    return true;
-}
-int main(void) {
-    Stack *stack = createStack(5);
-    
-    if (stack == NULL) {
-        printf("Error creating stack.\n");
-        return 1;
-    }
-    
-    if (isEmpty(stack)) printf("Stack is empty.\n");
-    
-    push(stack, 2);
-    printf("Size of stack: %d\n", stack->size);
-    
-    push(stack, 9);
-    push(stack, 4);
-    push(stack, 7);
-    push(stack, 8);
-    
-    if (isFull(stack)) printf("Stack is full.\n");
-    printf("Size of stack: %d\n", stack->size);
-    
-    bool try_push = push(stack, 5);
-    if(try_push==false) printf("Push failed.\n");
-    
-    int peek_val = 0;
-    peek(stack, &peek_val);
-    printf("Peek value is: %d\n", peek_val);
-    
-    int pop_val = 0;
-    
-    for(int i = 0;i < 5;i++){
-        pop(stack, &pop_val);
-        printf("The poped value is: %d\n", pop_val);
-    }
-    
-    bool try_pop = pop(stack, &pop_val);
-    if(try_pop == false) printf("pop failed!\n");
-    
-    bool try_peek = pop(stack, &peek_val);
-    if(try_peek == false) printf("peek failed!\n");
-
-    
-    destroyStack(stack);
-    
-    return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//// Struktura za stek
+//typedef struct {
+//    int *collection;  // pokazivač na niz
+//    int capacity;     // kapacitet steka
+//    int size;         // trenutna veličina steka
+//} Stack;
+//
+//// Funkcija za kreiranje steka
+//Stack *createStack(int capacity) {
+//    if (capacity <= 0) return NULL;
+//    
+//    Stack *stack = (Stack *)malloc(sizeof(Stack));
+//    if (stack == NULL) return NULL;
+//    
+//    stack->collection = (int *)malloc(sizeof(int) * capacity);
+//    if (stack->collection == NULL) {
+//        free(stack);
+//        return NULL;
+//    }
+//    stack->capacity = capacity;
+//    stack->size = 0;
+//    
+//    return stack;
+//}
+//
+//// Funkcija za uništavanje steka
+//void destroyStack(Stack *stack) {
+//    if (stack != NULL) {
+//        free(stack->collection);
+//        free(stack);
+//    }
+//}
+//
+//// Funkcija koja proverava da li je stek pun
+//bool isFull(Stack *stack) {
+//    return stack->size == stack->capacity;
+//}
+//
+//// Funkcija koja proverava da li je stek prazan
+//bool isEmpty(Stack *stack) {
+//    return stack->size == 0;
+//}
+//
+//// Funkcija za dodavanje elementa na stek
+//bool push(Stack *stack, int item) {
+//    if (isFull(stack)) return false;
+//    
+//    stack->collection[stack->size] = item;
+//    stack->size++;
+//    
+//    return true;
+//}
+//
+//// Funkcija za uklanjanje elementa sa steka
+//bool pop(Stack *stack, int *item) {
+//    if (isEmpty(stack)) return false;
+//    
+//    stack->size--;
+//    *item = stack->collection[stack->size];
+//    
+//    return true;
+//}
+//
+//// Funkcija za pregled elementa na vrhu steka
+//bool peek(Stack *stack, int *item) {
+//    if (isEmpty(stack)) return false;
+//    
+//    *item = stack->collection[stack->size - 1];
+//    
+//    return true;
+//}
+//int main(void) {
+//    Stack *stack = createStack(5);
+//    
+//    if (stack == NULL) {
+//        printf("Error creating stack.\n");
+//        return 1;
+//    }
+//    
+//    if (isEmpty(stack)) printf("Stack is empty.\n");
+//    
+//    push(stack, 2);
+//    printf("Size of stack: %d\n", stack->size);
+//    
+//    push(stack, 9);
+//    push(stack, 4);
+//    push(stack, 7);
+//    push(stack, 8);
+//    
+//    if (isFull(stack)) printf("Stack is full.\n");
+//    printf("Size of stack: %d\n", stack->size);
+//    
+//    bool try_push = push(stack, 5);
+//    if(try_push==false) printf("Push failed.\n");
+//    
+//    int peek_val = 0;
+//    peek(stack, &peek_val);
+//    printf("Peek value is: %d\n", peek_val);
+//    
+//    int pop_val = 0;
+//    
+//    for(int i = 0;i < 5;i++){
+//        pop(stack, &pop_val);
+//        printf("The poped value is: %d\n", pop_val);
+//    }
+//    
+//    bool try_pop = pop(stack, &pop_val);
+//    if(try_pop == false) printf("pop failed!\n");
+//    
+//    bool try_peek = pop(stack, &peek_val);
+//    if(try_peek == false) printf("peek failed!\n");
+//
+//    
+//    destroyStack(stack);
+//    
+//    return 0;
+//}
