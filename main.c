@@ -298,113 +298,206 @@
 //    return 0;
 //}
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//typedef struct {
+//    int *colection;
+//    int capacity;
+//    int size;
+//}Stack;
+//
+//Stack *createStack(int capacity){
+//    if(capacity <= 0) return NULL;
+//    
+//    Stack *stack = malloc(sizeof(Stack));
+//    if(stack == NULL) return NULL;
+//    
+//    stack->colection = malloc(sizeof(int) * capacity);
+//    
+//    if(stack->colection == NULL){
+//        free(stack);
+//        return NULL;
+//    }
+//    stack->capacity = capacity;
+//    stack->size = 0;
+//    return stack;
+//}
+//    
+//void destryStack (Stack *stack){
+//    if(stack->colection!=NULL){
+//        free(stack->colection);
+//        free(stack);
+//    }
+//}
+//
+//bool isFull(Stack *stack){
+//    return stack->capacity==stack->size;
+//}
+//
+//bool isEmpty(Stack *stack){
+//    return stack->size == 0;
+//}
+//bool push(Stack *stack, int item){
+//    if(isFull(stack)) return false;
+//    stack->colection[stack->size] = item;
+//    stack->size++;
+//    return true;
+//}
+//bool pop (Stack *stack, int *item){
+//    if(isEmpty(stack)) return false;
+//    stack->size--;
+//    *item = stack->colection[stack->size];
+//    
+//    return true;
+//}
+//
+//bool peek (Stack *stack, int *item){
+//    if(isEmpty(stack)) return false;
+//    
+//    *item = stack->colection[stack->size-1];
+//    return true;
+//}
+//
+//int main (void){
+//    Stack *stack = createStack(5);
+//    if(stack == NULL){
+//        printf("Error creating stack!\n");
+//        return 1;
+//    }
+//    
+//    if(isEmpty(stack)) printf("Stack is empty!\n");
+//    
+//    push(stack, 7);
+//    printf("Size of stack: %d\n", stack->size);
+//    push(stack, 3);
+//    push(stack, 4);
+//    push(stack, 2);
+//    push(stack, 9);
+//
+//    if(isFull(stack)) printf("Stack is full!\n");
+//    printf("Size of stack: %d\n", stack->size);
+//
+//    bool try_push = push(stack, 3);
+//    if(try_push == false) printf("Push failed!\n");
+//    
+//    int peek_value = 0;
+//    peek(stack, &peek_value);
+//    printf("The peek value is: %d\n", peek_value);
+//    
+//    int pop_val = 0;
+//    for(int i=0;i<5;i++){
+//        pop(stack, &pop_val);
+//        printf("The poped value is: %d\n", pop_val);
+//    }
+//    
+//    bool try_pop = pop(stack, &pop_val);
+//    if(try_pop == false) printf("Pop is failed!\n");
+//    
+//    bool try_peek = peek(stack, &peek_value);
+//    if(try_peek == false) printf("peek is failed!\n");
+//    
+//    
+//    destryStack(stack);
+//    
+//    
+//    return 0;
+//}
 
-typedef struct {
-    int *colection;
-    int capacity;
-    int size;
-}Stack;
 
-Stack *createStack(int capacity){
-    if(capacity <= 0) return NULL;
-    
-    Stack *stack = malloc(sizeof(Stack));
-    if(stack == NULL) return NULL;
-    
-    stack->colection = malloc(sizeof(int) * capacity);
-    
-    if(stack->colection == NULL){
-        free(stack);
-        return NULL;
-    }
-    stack->capacity = capacity;
-    stack->size = 0;
-    return stack;
-}
-    
-void destryStack (Stack *stack){
-    if(stack->colection!=NULL){
-        free(stack->colection);
-        free(stack);
-    }
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//typedef struct{
+//    int *colection;
+//    int capacity;
+//    int size;
+//} Stack;
+//
+//Stack *createStack (int capacity){
+//    if(capacity <= 0) return NULL;
+//    
+//    Stack *stack = malloc(sizeof(Stack));
+//    if(stack == NULL) return NULL;
+//    
+//    stack->colection = malloc(sizeof(int)*capacity);
+//    if(stack->colection == NULL){
+//        free(stack->colection);
+//        free(stack);
+//        return NULL;
+//    }
+//    stack->capacity = capacity;
+//    stack->size = 0;
+//    return stack;
+//}
+//
+//void destroyStack(Stack* stack){
+//    if(stack->colection!=NULL){
+//        free(stack->colection);
+//        free(stack);
+//    }
+//}
+//
+//bool isFull(Stack *stack){
+//    return stack->capacity == stack->size;
+//}
+//bool isEmpty(Stack *stack){
+//    return stack->size == 0;
+//}
+//
+//bool push(Stack *stack, int data){
+//    if(isFull(stack)) return false;
+//    
+//    stack->size++;
+//    stack->colection[stack->size] = data;
+//    return true;
+//}
+//bool pop (Stack *stack, int *data){
+//    if(isEmpty(stack)) return false;
+//    
+//    stack->size--;
+//    *data = stack->colection[stack->size+1];
+//    return true;
+//}
+//bool peek (Stack *stack, int *data){
+//    if(isEmpty(stack)) return NULL;
+//    
+//    *data = stack->colection[stack->size];
+//    return true;
+//}
+//
+//int main (void){
+//    Stack *stack = createStack(5);
+//    
+//    push(stack, 4);
+//    if(isEmpty(stack)) printf("Nema nist burko\n");
+//    printf("data: %d\n", stack->size);
+//    push(stack, 9);
+//    push(stack, 3);
+//    push(stack, 7);
+//    push(stack, 2);
+//    if(isFull(stack)) printf("Stack is full\n");
+//    printf("data: %d\n", stack->size);
+//    
+//    int peek_el = 0;
+//    peek(stack, &peek_el);
+//    printf("Peek element: %d\n", peek_el);
+//    
+//    int pop_el = 0;
+//    for(int i = 0;i<5;i++){
+//        pop(stack, &pop_el);
+//        printf("Poped element: %d\n", pop_el);
+//    }
+//    if(isEmpty(stack)) printf("stack is empty\n");
+//    
+//    destroyStack(stack);
+//    return 0;
+//}
 
-bool isFull(Stack *stack){
-    return stack->capacity==stack->size;
-}
 
-bool isEmpty(Stack *stack){
-    return stack->size == 0;
-}
-bool push(Stack *stack, int item){
-    if(isFull(stack)) return false;
-    stack->colection[stack->size] = item;
-    stack->size++;
-    return true;
-}
-bool pop (Stack *stack, int *item){
-    if(isEmpty(stack)) return false;
-    stack->size--;
-    *item = stack->colection[stack->size];
-    
-    return true;
-}
-
-bool peek (Stack *stack, int *item){
-    if(isEmpty(stack)) return false;
-    
-    *item = stack->colection[stack->size-1];
-    return true;
-}
-
-int main (void){
-    Stack *stack = createStack(5);
-    if(stack == NULL){
-        printf("Error creating stack!\n");
-        return 1;
-    }
-    
-    if(isEmpty(stack)) printf("Stack is empty!\n");
-    
-    push(stack, 7);
-    printf("Size of stack: %d\n", stack->size);
-    push(stack, 3);
-    push(stack, 4);
-    push(stack, 2);
-    push(stack, 9);
-
-    if(isFull(stack)) printf("Stack is full!\n");
-    printf("Size of stack: %d\n", stack->size);
-
-    bool try_push = push(stack, 3);
-    if(try_push == false) printf("Push failed!\n");
-    
-    int peek_value = 0;
-    peek(stack, &peek_value);
-    printf("The peek value is: %d\n", peek_value);
-    
-    int pop_val = 0;
-    for(int i=0;i<5;i++){
-        pop(stack, &pop_val);
-        printf("The poped value is: %d\n", pop_val);
-    }
-    
-    bool try_pop = pop(stack, &pop_val);
-    if(try_pop == false) printf("Pop is failed!\n");
-    
-    bool try_peek = peek(stack, &peek_value);
-    if(try_peek == false) printf("peek is failed!\n");
-    
-    
-    destryStack(stack);
-    
-    
-    return 0;
-}
-        
+//
 // ISPOCETKA/////////////////////////////////////////
 
 //#include <stdio.h>
@@ -1280,3 +1373,73 @@ int main (void){
 //    
 //    return 0;
 //}
+
+
+//QUEUE//////////////////////////////////////////////////////
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100 // Maksimalna veličina reda
+
+typedef struct {
+    int items[MAX];
+    int front, rear;
+} Queue;
+
+void init(Queue *q) {
+    q->front = -1;
+    q->rear = -1;
+}
+
+int isEmpty(Queue *q) {
+    return q->front == -1 || q->front > q->rear;
+}
+
+int isFull(Queue *q) {
+    return q->rear == MAX - 1;
+}
+
+void enqueue(Queue *q, int value) {
+    if (isFull(q)) {
+        printf("Queue overflow\n");
+        return;
+    }
+    if (isEmpty(q)) {
+        q->front = 0;
+    }
+    q->items[++(q->rear)] = value;
+}
+
+int dequeue(Queue *q) {
+    if (isEmpty(q)) {
+        printf("Queue underflow\n");
+        return -1;
+    } else {
+        return q->items[(q->front)++];
+    }
+}
+
+int front(Queue *q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+        return -1;
+    } else {
+        return q->items[q->front];
+    }
+}
+
+int main(void) {
+    Queue q;
+    init(&q);
+
+    enqueue(&q, 10);
+    enqueue(&q, 20);
+    enqueue(&q, 30); 
+
+    printf("Element na pocetku reda: %d\n", front(&q));
+    dequeue(&q);
+    printf("Element na pocetku reda: %d\n", front(&q));
+
+    return 0;
+}
