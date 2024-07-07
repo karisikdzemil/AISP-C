@@ -900,151 +900,171 @@
 
 //  CIRCULAR DOUBLY LINKED LIST //////////////////////
     
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//struct node *addAtEmpty(int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = temp;
+//    return temp;
+//}
+//struct node *addAtBegin(struct node *tail, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    
+//    struct node *temp2 = tail->next;
+//    
+//    if(tail==NULL){
+//        tail=addAtEmpty(data);
+//    }else{
+//        temp->prev = tail;
+//        temp->next = temp2;
+//        temp2->prev = temp;
+//        tail->next = temp;
+//    }
+//    return tail;
+//}
+//
+//struct node *addAtEnd(struct node *tail, int data){
+//    struct node *newP = malloc(sizeof(struct node));
+//    newP->prev = NULL;
+//    newP->data = data;
+//    newP->next = NULL;
+//    
+//    if(tail==NULL){
+//        return newP;
+//    }else{
+//        struct node *temp = tail->next;
+//        newP->next = tail->next;
+//        newP->prev = tail;
+//        tail->next = newP;
+//        temp->prev = newP;
+//        tail = newP;
+//    }
+//    return tail;
+//}
+//
+//struct node *addAfterPos(struct node *tail, int data, int pos){
+//    struct node *newP = malloc(sizeof(struct node));
+//    newP->prev = NULL;
+//    newP->data = data;
+//    newP->next = NULL;
+//    
+//    if(tail == NULL)
+//        return newP;
+//    
+//    struct node *temp = tail->next;
+//    while(pos>1){
+//        temp = temp->next;
+//        pos--;
+//    }
+//    newP->next = temp->next;
+//    newP->prev = temp;
+//    temp->next->prev = newP;
+//    temp->next = newP;
+//    if(temp == tail)
+//        tail = tail->next;
+//    
+//    return tail;
+//}
+//
+//struct node *delFirst(struct node *tail){
+//    struct node *temp = tail->next;
+//    if(tail==NULL)
+//        return tail;
+//    if(temp == tail){
+//        free(tail);
+//        tail = NULL;
+//        return tail;
+//    }
+//    tail->next = temp->next;
+//    temp->next->prev = tail;
+//    free(temp);
+//    temp = NULL;
+//    
+//    return tail;
+//}
+//
+//struct node *delLast(struct node *tail){
+//    struct node *temp;
+//    temp = tail->prev;
+//    if(tail==NULL)
+//        return tail;
+//    if(temp == tail){
+//        free(tail);
+//        tail = NULL;
+//        return tail;
+//    }
+//    temp->next = tail->next;
+//    tail->next->prev = temp;
+//    free(tail);
+//    tail = temp;
+//    return tail;
+//    
+//}
+//struct node *delInter(struct node *tail, int pos){
+//    struct node *temp = tail->next;
+//    while(pos>1){
+//        temp = temp->next;
+//        pos--;
+//    }
+//    struct node *temp2 = temp->prev;
+//    temp2->next = temp->next;
+//    temp->next->prev = temp2;
+//    free(temp);
+//    if(temp==tail)
+//        tail = temp2;
+//    return  tail;
+//}
+//
+//void print(struct node *tail){
+//    struct node *temp = tail->next;
+//    
+//    do{
+//        printf("%d\n", temp->data);
+//        temp = temp->next;
+//    }while(temp != tail->next);
+//}
+//
+//int main(void){
+//    struct node *tail = NULL;
+//    tail = addAtEmpty(12);
+//    tail = addAtEnd(tail, 24);
+//    tail = addAtEnd(tail, 67);
+////    tail = addAfterPos(tail, 78, 2);
+//    
+//      tail = delInter(tail, 2);
+////    tail = delFirst(tail);
+////    tail = delLast(tail);
+//    print(tail);
+//    return 0;
+//}
+
+//STACK/////// DATA STERUCTURE////////////
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-struct node {
-    struct node *prev;
-    int data;
-    struct node *next;
-};
-struct node *addAtEmpty(int data){
-    struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = temp;
-    return temp;
-}
-struct node *addAtBegin(struct node *tail, int data){
-    struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-    
-    struct node *temp2 = tail->next;
-    
-    if(tail==NULL){
-        tail=addAtEmpty(data);
-    }else{
-        temp->prev = tail;
-        temp->next = temp2;
-        temp2->prev = temp;
-        tail->next = temp;
-    }
-    return tail;
-}
-
-struct node *addAtEnd(struct node *tail, int data){
-    struct node *newP = malloc(sizeof(struct node));
-    newP->prev = NULL;
-    newP->data = data;
-    newP->next = NULL;
-    
-    if(tail==NULL){
-        return newP;
-    }else{
-        struct node *temp = tail->next;
-        newP->next = tail->next;
-        newP->prev = tail;
-        tail->next = newP;
-        temp->prev = newP;
-        tail = newP;
-    }
-    return tail;
-}
-
-struct node *addAfterPos(struct node *tail, int data, int pos){
-    struct node *newP = malloc(sizeof(struct node));
-    newP->prev = NULL;
-    newP->data = data;
-    newP->next = NULL;
-    
-    if(tail == NULL)
-        return newP;
-    
-    struct node *temp = tail->next;
-    while(pos>1){
-        temp = temp->next;
-        pos--;
-    }
-    newP->next = temp->next;
-    newP->prev = temp;
-    temp->next->prev = newP;
-    temp->next = newP;
-    if(temp == tail)
-        tail = tail->next;
-    
-    return tail;
-}
-
-struct node *delFirst(struct node *tail){
-    struct node *temp = tail->next;
-    if(tail==NULL)
-        return tail;
-    if(temp == tail){
-        free(tail);
-        tail = NULL;
-        return tail;
-    }
-    tail->next = temp->next;
-    temp->next->prev = tail;
-    free(temp);
-    temp = NULL;
-    
-    return tail;
-}
-
-struct node *delLast(struct node *tail){
-    struct node *temp;
-    temp = tail->prev;
-    if(tail==NULL)
-        return tail;
-    if(temp == tail){
-        free(tail);
-        tail = NULL;
-        return tail;
-    }
-    temp->next = tail->next;
-    tail->next->prev = temp;
-    free(tail);
-    tail = temp;
-    return tail;
-    
-}
-struct node *delInter(struct node *tail, int pos){
-    struct node *temp = tail->next;
-    while(pos>1){
-        temp = temp->next;
-        pos--;
-    }
-    struct node *temp2 = temp->prev;
-    temp2->next = temp->next;
-    temp->next->prev = temp2;
-    free(temp);
-    if(temp==tail)
-        tail = temp2;
-    return  tail;
-}
-
-void print(struct node *tail){
-    struct node *temp = tail->next;
-    
-    do{
-        printf("%d\n", temp->data);
-        temp = temp->next;
-    }while(temp != tail->next);
-}
+typedef struct {
+    int colection;
+    int capacity;
+    int size;
+}stack;
 
 int main(void){
-    struct node *tail = NULL;
-    tail = addAtEmpty(12);
-    tail = addAtEnd(tail, 24);
-    tail = addAtEnd(tail, 67);
-//    tail = addAfterPos(tail, 78, 2);
     
-      tail = delInter(tail, 2);
-//    tail = delFirst(tail);
-//    tail = delLast(tail);
-    print(tail);
+    printf("hello world");
     return 0;
 }
