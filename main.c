@@ -498,65 +498,146 @@
 
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#define MAX 100
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, rear;
+//}Queue;
+//
+//void init (Queue *q){
+//    q->front = -1;
+//    q->rear = -1;
+//}
+//int isEmpty(Queue *q){
+//    return q->front == -1||q->front >q->rear;
+//}
+//int isFull (Queue *q){
+//    return q->rear == q->front -1;
+//}
+//void enque (Queue *q, int value){
+//    if(isFull(q)){
+//        printf("Enque failed, queue is full!\n");
+//        return;
+//    }if(isEmpty(q))
+//        q->front = 0;
+//    
+//        q->items[++(q->rear)] = value;
+//}
+//int deque(Queue *q){
+//    if(isEmpty(q)){
+//        printf("Queue is empty!\n");
+//        return -1;
+//    }else{
+//        return q->items[(q->front)++];
+//    }
+//}
+//int front(Queue *q){
+//    if(isEmpty(q)){
+//        printf("Que is empty");
+//        return -1;
+//    }else{
+//        return q->items[(q->front)];
+//    }
+//}
+//
+//int main(void){
+//    Queue q;
+//    init(&q);
+//    
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//
+//    printf("First element Queue: %d\n", front(&q));
+//    deque(&q);
+//    printf("First element Queue: %d\n", front(&q));
+//    return 0;
+//
+//}
 
-typedef struct {
-    int items[MAX];
-    int front, rear;
-}Queue;
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int top;
+//} Stack;
+//
+//void init(Stack *s) {
+//    s->top = -1;
+//}
+//
+//bool isEmpty(Stack *s) {
+//    return s->top == -1;
+//}
+//
+//bool isFull(Stack *s) {
+//    return s->top == MAX - 1;
+//}
+//
+//void push(Stack *s, int data) {
+//    if (isFull(s)) {
+//        printf("Stack is full\n");
+//        return;
+//    }
+//    s->items[++(s->top)] = data;
+//}
+//
+//int pop(Stack *s) {
+//    if (isEmpty(s)) {
+//        printf("Stack is already empty\n");
+//        return -1; // Indikator greške
+//    }
+//    return s->items[(s->top)--];
+//}
+//
+//int peek(Stack *s) {
+//    if (isEmpty(s)) {
+//        printf("Stack is empty\n");
+//        return -1; // Indikator greške
+//    }
+//    return s->items[s->top];
+//}
+//
+//int main(void) {
+//    Stack s;
+//    init(&s);
+//    
+//    push(&s, 23);
+//    push(&s, 43);
+//    push(&s, 77);
+//    
+//    printf("Element na vrhu steka: %d\n", peek(&s));
+//    printf("Element uklonjen sa steka: %d\n", pop(&s));
+//    printf("Element na vrhu steka: %d\n", peek(&s));
+//    
+//    return 0;
+//}
 
-void init (Queue *q){
-    q->front = -1;
-    q->rear = -1;
-}
-int isEmpty(Queue *q){
-    return q->front == -1||q->front >q->rear;
-}
-int isFull (Queue *q){
-    return q->rear == q->front -1;
-}
-void enque (Queue *q, int value){
-    if(isFull(q)){
-        printf("Enque failed, queue is full!\n");
-        return;
-    }if(isEmpty(q))
-        q->front = 0;
-    
-        q->items[++(q->rear)] = value;
-}
-int deque(Queue *q){
-    if(isEmpty(q)){
-        printf("Queue is empty!\n");
-        return -1;
-    }else{
-        return q->items[(q->front)++];
-    }
-}
-int front(Queue *q){
-    if(isEmpty(q)){
-        printf("Que is empty");
-        return -1;
-    }else{
-        return q->items[(q->front)];
-    }
-}
 
-int main(void){
-    Queue q;
-    init(&q);
-    
-    enque(&q, 10);
-    enque(&q, 20);
-    enque(&q, 30);
 
-    printf("First element Queue: %d\n", front(&q));
-    deque(&q);
-    printf("First element Queue: %d\n", front(&q));
-    return 0;
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //
 // ISPOCETKA/////////////////////////////////////////
@@ -1504,3 +1585,69 @@ int main(void){
 //
 //    return 0;
 //}
+
+// BINARY TREE///////////////////////
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//// Definicija strukture čvora
+//typedef struct Node {
+//    int data;
+//    struct Node *left;
+//    struct Node *right;
+//} Node;
+//
+//// Funkcija za kreiranje novog čvora
+//Node* createNode(int data) {
+//    Node* newNode = (Node*)malloc(sizeof(Node));
+//    newNode->data = data;
+//    newNode->left = NULL;
+//    newNode->right = NULL;
+//    return newNode;
+//}
+//
+//// Funkcija za umetanje elementa u binarno stablo pretrage
+//Node* insert(Node* root, int data) {
+//    if (root == NULL) {
+//        return createNode(data);
+//    }
+//    if (data < root->data) {
+//        root->left = insert(root->left, data);
+//    } else if (data > root->data) {
+//        root->right = insert(root->right, data);
+//    }
+//    return root;
+//}
+//
+//// Rekurzivna funkcija za ispisivanje listova stabla
+//void printLeaves(Node* root) {
+//    if (root == NULL) {
+//        return;
+//    }
+//    if (root->left == NULL && root->right == NULL) {
+//        printf("%d ", root->data);
+//    }
+//    printLeaves(root->left);
+//    printLeaves(root->right);
+//}
+//
+//// Glavni program
+//int main(void) {
+//    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
+//    int n = sizeof(arr) / sizeof(arr[0]);
+//    
+//    Node* root = NULL;
+//    for (int i = 0; i < n; i++) {
+//        root = insert(root, arr[i]);
+//    }
+//    
+//    printf("Listovi stabla su: ");
+//    printLeaves(root);
+//    printf("\n");
+//    
+//    return 0;
+//}
+
+
+
