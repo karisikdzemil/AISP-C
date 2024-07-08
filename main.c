@@ -497,6 +497,67 @@
 //}
 
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+
+typedef struct {
+    int items[MAX];
+    int front, rear;
+}Queue;
+
+void init (Queue *q){
+    q->front = -1;
+    q->rear = -1;
+}
+int isEmpty(Queue *q){
+    return q->front == -1||q->front >q->rear;
+}
+int isFull (Queue *q){
+    return q->rear == q->front -1;
+}
+void enque (Queue *q, int value){
+    if(isFull(q)){
+        printf("Enque failed, queue is full!\n");
+        return;
+    }if(isEmpty(q))
+        q->front = 0;
+    
+        q->items[++(q->rear)] = value;
+}
+int deque(Queue *q){
+    if(isEmpty(q)){
+        printf("Queue is empty!\n");
+        return -1;
+    }else{
+        return q->items[(q->front)++];
+    }
+}
+int front(Queue *q){
+    if(isEmpty(q)){
+        printf("Que is empty");
+        return -1;
+    }else{
+        return q->items[(q->front)];
+    }
+}
+
+int main(void){
+    Queue q;
+    init(&q);
+    
+    enque(&q, 10);
+    enque(&q, 20);
+    enque(&q, 30);
+
+    printf("First element Queue: %d\n", front(&q));
+    deque(&q);
+    printf("First element Queue: %d\n", front(&q));
+    return 0;
+
+}
+
 //
 // ISPOCETKA/////////////////////////////////////////
 
@@ -1377,69 +1438,69 @@
 
 //QUEUE//////////////////////////////////////////////////////
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#define MAX 100 // Maksimalna veličina reda
-
-typedef struct {
-    int items[MAX];
-    int front, rear;
-} Queue;
-
-void init(Queue *q) {
-    q->front = -1;
-    q->rear = -1;
-}
-
-int isEmpty(Queue *q) {
-    return q->front == -1 || q->front > q->rear;
-}
-
-int isFull(Queue *q) {
-    return q->rear == MAX - 1;
-}
-
-void enqueue(Queue *q, int value) {
-    if (isFull(q)) {
-        printf("Queue overflow\n");
-        return;
-    }
-    if (isEmpty(q)) {
-        q->front = 0;
-    }
-    q->items[++(q->rear)] = value;
-}
-
-int dequeue(Queue *q) {
-    if (isEmpty(q)) {
-        printf("Queue underflow\n");
-        return -1;
-    } else {
-        return q->items[(q->front)++];
-    }
-}
-
-int front(Queue *q) {
-    if (isEmpty(q)) {
-        printf("Queue is empty\n");
-        return -1;
-    } else {
-        return q->items[q->front];
-    }
-}
-
-int main(void) {
-    Queue q;
-    init(&q);
-
-    enqueue(&q, 10);
-    enqueue(&q, 20);
-    enqueue(&q, 30); 
-
-    printf("Element na pocetku reda: %d\n", front(&q));
-    dequeue(&q);
-    printf("Element na pocetku reda: %d\n", front(&q));
-
-    return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//#define MAX 100 // Maksimalna veličina reda
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, rear;
+//} Queue;
+//
+//void init(Queue *q) {
+//    q->front = -1;
+//    q->rear = -1;
+//}
+//
+//int isEmpty(Queue *q) {
+//    return q->front == -1 || q->front > q->rear;
+//}
+//
+//int isFull(Queue *q) {
+//    return q->rear == MAX - 1;
+//}
+//
+//void enqueue(Queue *q, int value) {
+//    if (isFull(q)) {
+//        printf("Queue overflow\n");
+//        return;
+//    }
+//    if (isEmpty(q)) {
+//        q->front = 0;
+//    }
+//    q->items[++(q->rear)] = value;
+//}
+//
+//int dequeue(Queue *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue underflow\n");
+//        return -1;
+//    } else {
+//        return q->items[(q->front)++];
+//    }
+//}
+//
+//int front(Queue *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty\n");
+//        return -1;
+//    } else {
+//        return q->items[q->front];
+//    }
+//}
+//
+//int main(void) {
+//    Queue q;
+//    init(&q);
+//
+//    enqueue(&q, 10);
+//    enqueue(&q, 20);
+//    enqueue(&q, 30);
+//
+//    printf("Element na pocetku reda: %d\n", front(&q));
+//    dequeue(&q);
+//    printf("Element na pocetku reda: %d\n", front(&q));
+//
+//    return 0;
+//}
