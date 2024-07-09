@@ -789,66 +789,66 @@
 
 //
 
-#include <stdio.h>
-#include <stdlib.h>
-
-// Definicija strukture čvora
-typedef struct Node {
-    int data;
-    struct Node *left;
-    struct Node *right;
-} Node;
-
-// Funkcija za kreiranje novog čvora
-Node* createNode(int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
-}
-
-// Funkcija za umetanje elementa u binarno stablo pretrage
-Node* insert(Node* root, int data) {
-    if (root == NULL) {
-        return createNode(data);
-    }
-    if (data < root->data) {
-        root->left = insert(root->left, data);
-    } else if (data > root->data) {
-        root->right = insert(root->right, data);
-    }
-    return root;
-}
-
-// Rekurzivna funkcija za ispisivanje listova stabla
-void printLeaves(Node* root) {
-    if (root == NULL) {
-        return;
-    }
-    if (root->left == NULL && root->right == NULL) {
-        printf("%d ", root->data);
-    }
-    printLeaves(root->left);
-    printLeaves(root->right);
-}
-
-// Glavni program
-int main() {
-    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    
-    Node* root = NULL;
-    for (int i = 0; i < n; i++) {
-        root = insert(root, arr[i]);
-    }
-    
-    printf("Listovi stabla su: ");
-    printLeaves(root);
-    printf("\n");
-    
-    return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//// Definicija strukture čvora
+//typedef struct Node {
+//    int data;
+//    struct Node *left;
+//    struct Node *right;
+//} Node;
+//
+//// Funkcija za kreiranje novog čvora
+//Node* createNode(int data) {
+//    Node* newNode = (Node*)malloc(sizeof(Node));
+//    newNode->data = data;
+//    newNode->left = NULL;
+//    newNode->right = NULL;
+//    return newNode;
+//}
+//
+//// Funkcija za umetanje elementa u binarno stablo pretrage
+//Node* insert(Node* root, int data) {
+//    if (root == NULL) {
+//        return createNode(data);
+//    }
+//    if (data < root->data) {
+//        root->left = insert(root->left, data);
+//    } else if (data > root->data) {
+//        root->right = insert(root->right, data);
+//    }
+//    return root;
+//}
+//
+//// Rekurzivna funkcija za ispisivanje listova stabla
+//void printLeaves(Node* root) {
+//    if (root == NULL) {
+//        return;
+//    }
+//    if (root->left == NULL && root->right == NULL) {
+//        printf("%d ", root->data);
+//    }
+//    printLeaves(root->left);
+//    printLeaves(root->right);
+//}
+//
+//// Glavni program
+//int main(void) {
+//    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
+//    int n = sizeof(arr) / sizeof(arr[0]);
+//    
+//    Node* root = NULL;
+//    for (int i = 0; i < n; i++) {
+//        root = insert(root, arr[i]);
+//    }
+//    
+//    printf("Listovi stabla su: ");
+//    printLeaves(root);
+//    printf("\n");
+//    
+//    return 0;
+//}
 
 
 
@@ -1952,6 +1952,112 @@ int main() {
 //    
 //    return 0;
 //}
+
+// HESIRANJE///////////////////////////////////
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TABLE_SIZE 11
+
+typedef struct {
+    int* table;
+    int size;
+} HashTable;
+
+// Funkcija za inicijalizaciju hash tabele
+void initHashTable(HashTable* ht) {
+    ht->table = (int*)malloc(TABLE_SIZE * sizeof(int));
+    ht->size = TABLE_SIZE;
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        ht->table[i] = -1;  // -1 označava prazno mesto
+    }
+}
+
+// Hash funkcija
+unsigned int hashFunction(int key) {
+    return key % TABLE_SIZE;
+}
+
+// Funkcija za umetanje u hash tabelu
+void insert(HashTable* ht, int key) {
+    unsigned int index = hashFunction(key);
+    int originalIndex = index;
+    while (ht->table[index] != -1) {
+        index = (index + 1) % TABLE_SIZE;
+        if (index == originalIndex) {
+            printf("Hash table is full\n");
+            return;
+        }
+    }
+    ht->table[index] = key;
+}
+
+// Funkcija za pretragu u hash tabeli
+int search(HashTable* ht, int key) {
+    unsigned int index = hashFunction(key);
+    int originalIndex = index;
+    while (ht->table[index] != -1) {
+        if (ht->table[index] == key) {
+            return index;
+        }
+        index = (index + 1) % TABLE_SIZE;
+        if (index == originalIndex) {
+            return -1; // Ključ nije pronađen
+        }
+    }
+    return -1; // Ključ nije pronađen
+}
+
+// Funkcija za brisanje iz hash tabele
+void delete(HashTable* ht, int key) {
+    int index = search(ht, key);
+    if (index == -1) {
+        printf("Key not found\n");
+        return;
+    }
+    ht->table[index] = -1;
+}
+
+// Glavni program
+int main(void) {
+    HashTable ht;
+    initHashTable(&ht);
+
+    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Umetanje elemenata u hash tabelu
+    for (int i = 0; i < n; i++) {
+        insert(&ht, arr[i]);
+    }
+
+    // Prikaz umetnutih elemenata
+    printf("Hash table:\n");
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (ht.table[i] != -1) {
+            printf("Index %d: %d\n", i, ht.table[i]);
+        } else {
+            printf("Index %d: EMPTY\n", i);
+        }
+    }
+
+    // Pretraga elemenata u hash tabeli
+    printf("\nPretraga u hash tabeli:\n");
+    for (int i = 0; i < n; i++) {
+        int index = search(&ht, arr[i]);
+        if (index != -1) {
+            printf("Key %d found at index %d\n", arr[i], index);
+        } else {
+            printf("Key %d not found\n", arr[i]);
+        }
+    }
+
+    // Oslobađanje memorije
+    free(ht.table);
+
+    return 0;
+}
 
 
 
