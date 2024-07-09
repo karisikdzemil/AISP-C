@@ -724,62 +724,129 @@
 //
 
 
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int front, rear;
+//}Queue;
+//
+//void init (Queue *que){
+//    que->front = -1;
+//    que->rear = -1;
+//}
+//
+//int isEmpty(Queue *que){
+//    return que->front == -1||que->front>que->rear;
+//}
+//int isfull(Queue *que){
+//    return que->rear == MAX -1;
+//}
+//void enque (Queue *que, int value){
+//    if(isfull(que)) printf("Queue is overflow");
+//    
+//    if(isEmpty(que))
+//        que->front = 0;
+//    que->items[++(que->rear)] = value;
+//}
+//int deque (Queue *que){
+//    if (isEmpty(que)) {
+//        printf("Queue underflow!\n");
+//        return -1;
+//    }
+//    return que->items[(que->front)++];
+//}
+//int front (Queue * que){
+//    if(isEmpty(que)){
+//        printf("Queue is empty!\n");
+//        return -1;
+//    }else{
+//        return que->items[que->front];
+//    }
+//    
+//}
+
+//int main(void){
+//    Queue que;
+//    init(&que);
+//    enque(&que, 20);
+//    enque(&que, 30);
+//    enque(&que, 40);
+//    
+//    printf("Element na pocetku reda: %d\n", front(&que));
+//    deque(&que);
+//    printf("Element na pocetku reda: %d\n", front(&que));
+//    return 0;
+//}
+//
+//
+//
+//
+
+//
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
-#define MAX 100
+// Definicija strukture čvora
+typedef struct Node {
+    int data;
+    struct Node *left;
+    struct Node *right;
+} Node;
 
-typedef struct{
-    int items[MAX];
-    int front, rear;
-}Queue;
-
-void init (Queue *que){
-    que->front = -1;
-    que->rear = -1;
+// Funkcija za kreiranje novog čvora
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
 }
 
-int isEmpty(Queue *que){
-    return que->front == -1||que->front>que->rear;
-}
-int isfull(Queue *que){
-    return que->rear == MAX -1;
-}
-void enque (Queue *que, int value){
-    if(isfull(que)) printf("Queue is overflow");
-    
-    if(isEmpty(que))
-        que->front = 0;
-    que->items[++(que->rear)] = value;
-}
-int deque (Queue *que){
-    if (isEmpty(que)) {
-        printf("Queue underflow!\n");
-        return -1;
+// Funkcija za umetanje elementa u binarno stablo pretrage
+Node* insert(Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
     }
-    return que->items[(que->front)++];
-}
-int front (Queue * que){
-    if(isEmpty(que)){
-        printf("Queue is empty!\n");
-        return -1;
-    }else{
-        return que->items[que->front];
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
     }
-    
+    return root;
 }
 
-int main(void){
-    Queue que;
-    init(&que);
-    enque(&que, 20);
-    enque(&que, 30);
-    enque(&que, 40);
+// Rekurzivna funkcija za ispisivanje listova stabla
+void printLeaves(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+    if (root->left == NULL && root->right == NULL) {
+        printf("%d ", root->data);
+    }
+    printLeaves(root->left);
+    printLeaves(root->right);
+}
+
+// Glavni program
+int main() {
+    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
     
-    printf("Element na pocetku reda: %d\n", front(&que));
-    deque(&que);
-    printf("Element na pocetku reda: %d\n", front(&que));
+    Node* root = NULL;
+    for (int i = 0; i < n; i++) {
+        root = insert(root, arr[i]);
+    }
+    
+    printf("Listovi stabla su: ");
+    printLeaves(root);
+    printf("\n");
+    
     return 0;
 }
 
@@ -787,7 +854,7 @@ int main(void){
 
 
 
-//
+
 // ISPOCETKA/////////////////////////////////////////
 
 //#include <stdio.h>
@@ -1733,6 +1800,95 @@ int main(void){
 //
 //    return 0;
 //}
+
+//  QUEUE WITH LINKED LIST
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//// Struktura za čvor u povezanoj listi
+//typedef struct Node {
+//    int data;
+//    struct Node* next;
+//} Node;
+//
+//// Struktura za red
+//typedef struct Queue {
+//    Node* front; // Pokazivač na prvi element u redu
+//    Node* rear;  // Pokazivač na poslednji element u redu
+//} Queue;
+//
+//// Funkcija za inicijalizaciju reda
+//void init(Queue* q) {
+//    q->front = NULL;
+//    q->rear = NULL;
+//}
+//
+//// Funkcija za proveru da li je red prazan
+//int isEmpty(Queue* q) {
+//    return q->front == NULL;
+//}
+//
+//// Funkcija za dodavanje elemenata u red (enqueue)
+//void enqueue(Queue* q, int value) {
+//    Node* newNode = (Node*)malloc(sizeof(Node));
+//    if (newNode == NULL) {
+//        printf("Memory allocation error\n");
+//        return;
+//    }
+//    newNode->data = value;
+//    newNode->next = NULL;
+//
+//    if (isEmpty(q)) {
+//        q->front = newNode;
+//        q->rear = newNode;
+//    } else {
+//        q->rear->next = newNode;
+//        q->rear = newNode;
+//    }
+//}
+//
+//// Funkcija za uklanjanje elemenata iz reda (dequeue)
+//int dequeue(Queue* q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty\n");
+//        return -1;
+//    }
+//    Node* temp = q->front;
+//    int data = temp->data;
+//    q->front = q->front->next;
+//
+//    if (q->front == NULL) {
+//        q->rear = NULL;
+//    }
+//    free(temp);
+//    return data;
+//}
+//
+//// Funkcija za pristup prvom elementu reda (peek/front)
+//int front(Queue* q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty\n");
+//        return -1;
+//    }
+//    return q->front->data;
+//}
+//
+//int main(void) {
+//    Queue q;
+//    init(&q);
+//
+//    enqueue(&q, 10);
+//    enqueue(&q, 20);
+//    enqueue(&q, 30);
+//    
+//    printf("Front of the queue: %d\n", front(&q));
+//    printf("Element removed from the queue: %d\n", dequeue(&q));
+//    printf("Front of the queue: %d\n", front(&q));
+//
+//    return 0;
+//}
+//
 
 // BINARY TREE///////////////////////
 
