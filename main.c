@@ -620,20 +620,168 @@
 //}
 
 
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//typedef struct {
+//    int *collection;
+//    int capacity;
+//    int size;
+//} Stack;
+//
+//Stack *createStack(int capacity) {
+//    if (capacity <= 0) return NULL;
+//    
+//    Stack *stack = (Stack *)malloc(sizeof(Stack));
+//    if (stack == NULL) return NULL;
+//    
+//    stack->collection = (int *)malloc(sizeof(int) * capacity);
+//    if (stack->collection == NULL) {
+//        free(stack);
+//        return NULL;
+//    }
+//        
+//    stack->capacity = capacity;
+//    stack->size = 0;
+//    return stack;
+//}
+//
+//void destroyStack(Stack *stack) {
+//    if (stack != NULL) {
+//        free(stack->collection);
+//        free(stack);
+//    }
+//}
+//
+//bool isFull(Stack *stack) {
+//    return stack->size == stack->capacity;
+//}
+//
+//bool isEmpty(Stack *stack) {
+//    return stack->size == 0;
+//}
+//
+//bool push(Stack *stack, int item) {
+//    if (isFull(stack)) return false;
+//    
+//    stack->collection[stack->size] = item;
+//    stack->size++;
+//    return true;
+//}
+//
+//bool pop(Stack *stack, int *item) {
+//    if (isEmpty(stack)) return false;
+//    
+//    stack->size--;
+//    *item = stack->collection[stack->size];
+//    return true;
+//}
+//
+//bool peek(Stack *stack, int *item) {
+//    if (isEmpty(stack)) return false;
+//    
+//    *item = stack->collection[stack->size - 1];
+//    return true;
+//}
+//
+//int main(void) {
+//    Stack *stack = createStack(20);
+//    
+//    if (stack == NULL) {
+//        printf("Error creating stack.\n");
+//        return 1;
+//    }
+//
+//    push(stack, 10);
+//    push(stack, 20);
+//    push(stack, 30);
+//
+//    int peek_val = 0;
+//    int pop_val = 0;
+//    
+//    if (peek(stack, &peek_val)) {
+//        printf("Peek value is: %d\n", peek_val);
+//    } else {
+//        printf("Stack is empty. Cannot peek.\n");
+//    }
+//
+//    if (pop(stack, &pop_val)) {
+//        printf("Popped value is: %d\n", pop_val);
+//    } else {
+//        printf("Stack is empty. Cannot pop.\n");
+//    }
+//    
+//    if (peek(stack, &peek_val)) {
+//        printf("Peek value after pop is: %d\n", peek_val);
+//    } else {
+//        printf("Stack is empty. Cannot peek.\n");
+//    }
+//
+//    destroyStack(stack);
+//    return 0;
+//}
+//
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
+#define MAX 100
 
+typedef struct{
+    int items[MAX];
+    int front, rear;
+}Queue;
 
+void init (Queue *que){
+    que->front = -1;
+    que->rear = -1;
+}
 
+int isEmpty(Queue *que){
+    return que->front == -1||que->front>que->rear;
+}
+int isfull(Queue *que){
+    return que->rear == MAX -1;
+}
+void enque (Queue *que, int value){
+    if(isfull(que)) printf("Queue is overflow");
+    
+    if(isEmpty(que))
+        que->front = 0;
+    que->items[++(que->rear)] = value;
+}
+int deque (Queue *que){
+    if (isEmpty(que)) {
+        printf("Queue underflow!\n");
+        return -1;
+    }
+    return que->items[(que->front)++];
+}
+int front (Queue * que){
+    if(isEmpty(que)){
+        printf("Queue is empty!\n");
+        return -1;
+    }else{
+        return que->items[que->front];
+    }
+    
+}
 
-
-
-
-
-
-
-
+int main(void){
+    Queue que;
+    init(&que);
+    enque(&que, 20);
+    enque(&que, 30);
+    enque(&que, 40);
+    
+    printf("Element na pocetku reda: %d\n", front(&que));
+    deque(&que);
+    printf("Element na pocetku reda: %d\n", front(&que));
+    return 0;
+}
 
 
 
