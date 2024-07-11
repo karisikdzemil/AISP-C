@@ -850,9 +850,101 @@
 //    return 0;
 //}
 
-
-
-
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//#define TABLE_SIZE 10
+//#define EMPTY_SLOT -1
+//
+//// Struktura za heš tabelu
+//typedef struct {
+//    int* table;
+//} HashTable;
+//
+//// Inicijalizacija heš tabele
+//HashTable* createHashTable() {
+//    HashTable* hashTable = (HashTable*) malloc(sizeof(HashTable));
+//    hashTable->table = (int*) malloc(TABLE_SIZE * sizeof(int));
+//    
+//    for (int i = 0; i < TABLE_SIZE; i++) {
+//        hashTable->table[i] = EMPTY_SLOT;
+//    }
+//
+//    return hashTable;
+//}
+//
+//// Heš funkcija
+//int hashFunction(int key) {
+//    return key % TABLE_SIZE;
+//}
+//
+//// Funkcija za umetanje ključa u heš tabelu koristeći linearno hesiranje
+//void insert(HashTable* hashTable, int key) {
+//    int hashIndex = hashFunction(key);
+//
+//    // Linearno hesiranje - traženje sledećeg slobodnog slota
+//    while (hashTable->table[hashIndex] != EMPTY_SLOT) {
+//        hashIndex = (hashIndex + 1) % TABLE_SIZE;
+//    }
+//
+//    hashTable->table[hashIndex] = key;
+//}
+//
+//// Funkcija za pretragu ključa u heš tabeli
+//int search(HashTable* hashTable, int key) {
+//    int hashIndex = hashFunction(key);
+//    
+//    // Linearno pretraga
+//    while (hashTable->table[hashIndex] != EMPTY_SLOT) {
+//        if (hashTable->table[hashIndex] == key) {
+//            return hashIndex;
+//        }
+//        hashIndex = (hashIndex + 1) % TABLE_SIZE;
+//    }
+//
+//    return -1; // Ključ nije pronađen
+//}
+//
+//// Funkcija za štampanje heš tabele
+//void printHashTable(HashTable* hashTable) {
+//    for (int i = 0; i < TABLE_SIZE; i++) {
+//        if (hashTable->table[i] == EMPTY_SLOT) {
+//            printf("Slot %d: EMPTY\n", i);
+//        } else {
+//            printf("Slot %d: %d\n", i, hashTable->table[i]);
+//        }
+//    }
+//}
+//
+//// Oslobađanje memorije zauzete heš tabelom
+//void freeHashTable(HashTable* hashTable) {
+//    free(hashTable->table);
+//    free(hashTable);
+//}
+//
+//int main() {
+//    HashTable* hashTable = createHashTable();
+//    
+//    insert(hashTable, 5);
+//    insert(hashTable, 15);
+//    insert(hashTable, 25);
+//    insert(hashTable, 35);
+//
+//    printHashTable(hashTable);
+//
+//    int key = 25;
+//    int index = search(hashTable, key);
+//    if (index != -1) {
+//        printf("Key %d found at index %d\n", key, index);
+//    } else {
+//        printf("Key %d not found\n", key);
+//    }
+//
+//    freeHashTable(hashTable);
+//    return 0;
+//}
+//
+//
 
 
 // ISPOCETKA/////////////////////////////////////////
@@ -1955,109 +2047,123 @@
 
 // HESIRANJE///////////////////////////////////
 
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//#define TABLE_SIZE 11
+//
+//typedef struct {
+//    int* table;
+//    int size;
+//} HashTable;
+//
+//// Funkcija za inicijalizaciju hash tabele
+//void initHashTable(HashTable* ht) {
+//    ht->table = (int*)malloc(TABLE_SIZE * sizeof(int));
+//    ht->size = TABLE_SIZE;
+//    for (int i = 0; i < TABLE_SIZE; i++) {
+//        ht->table[i] = -1;  // -1 označava prazno mesto
+//    }
+//}
+//
+//// Hash funkcija
+//unsigned int hashFunction(int key) {
+//    return key % TABLE_SIZE;
+//}
+//
+//// Funkcija za umetanje u hash tabelu
+//void insert(HashTable* ht, int key) {
+//    unsigned int index = hashFunction(key);
+//    int originalIndex = index;
+//    while (ht->table[index] != -1) {
+//        index = (index + 1) % TABLE_SIZE;
+//        if (index == originalIndex) {
+//            printf("Hash table is full\n");
+//            return;
+//        }
+//    }
+//    ht->table[index] = key;
+//}
+//
+//// Funkcija za pretragu u hash tabeli
+//int search(HashTable* ht, int key) {
+//    unsigned int index = hashFunction(key);
+//    int originalIndex = index;
+//    while (ht->table[index] != -1) {
+//        if (ht->table[index] == key) {
+//            return index;
+//        }
+//        index = (index + 1) % TABLE_SIZE;
+//        if (index == originalIndex) {
+//            return -1; // Ključ nije pronađen
+//        }
+//    }
+//    return -1; // Ključ nije pronađen
+//}
+//
+//// Funkcija za brisanje iz hash tabele
+//void delete(HashTable* ht, int key) {
+//    int index = search(ht, key);
+//    if (index == -1) {
+//        printf("Key not found\n");
+//        return;
+//    }
+//    ht->table[index] = -1;
+//}
+//
+//// Glavni program
+//int main(void) {
+//    HashTable ht;
+//    initHashTable(&ht);
+//
+//    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
+//    int n = sizeof(arr) / sizeof(arr[0]);
+//
+//    // Umetanje elemenata u hash tabelu
+//    for (int i = 0; i < n; i++) {
+//        insert(&ht, arr[i]);
+//    }
+//
+//    // Prikaz umetnutih elemenata
+//    printf("Hash table:\n");
+//    for (int i = 0; i < TABLE_SIZE; i++) {
+//        if (ht.table[i] != -1) {
+//            printf("Index %d: %d\n", i, ht.table[i]);
+//        } else {
+//            printf("Index %d: EMPTY\n", i);
+//        }
+//    }
+//
+//    // Pretraga elemenata u hash tabeli
+//    printf("\nPretraga u hash tabeli:\n");
+//    for (int i = 0; i < n; i++) {
+//        int index = search(&ht, arr[i]);
+//        if (index != -1) {
+//            printf("Key %d found at index %d\n", arr[i], index);
+//        } else {
+//            printf("Key %d not found\n", arr[i]);
+//        }
+//    }
+//
+//    // Oslobađanje memorije
+//    free(ht.table);
+//
+//    return 0;
+//}
+//
 
-#define TABLE_SIZE 11
 
-typedef struct {
-    int* table;
-    int size;
-} HashTable;
-
-// Funkcija za inicijalizaciju hash tabele
-void initHashTable(HashTable* ht) {
-    ht->table = (int*)malloc(TABLE_SIZE * sizeof(int));
-    ht->size = TABLE_SIZE;
-    for (int i = 0; i < TABLE_SIZE; i++) {
-        ht->table[i] = -1;  // -1 označava prazno mesto
-    }
-}
-
-// Hash funkcija
-unsigned int hashFunction(int key) {
-    return key % TABLE_SIZE;
-}
-
-// Funkcija za umetanje u hash tabelu
-void insert(HashTable* ht, int key) {
-    unsigned int index = hashFunction(key);
-    int originalIndex = index;
-    while (ht->table[index] != -1) {
-        index = (index + 1) % TABLE_SIZE;
-        if (index == originalIndex) {
-            printf("Hash table is full\n");
-            return;
-        }
-    }
-    ht->table[index] = key;
-}
-
-// Funkcija za pretragu u hash tabeli
-int search(HashTable* ht, int key) {
-    unsigned int index = hashFunction(key);
-    int originalIndex = index;
-    while (ht->table[index] != -1) {
-        if (ht->table[index] == key) {
-            return index;
-        }
-        index = (index + 1) % TABLE_SIZE;
-        if (index == originalIndex) {
-            return -1; // Ključ nije pronađen
-        }
-    }
-    return -1; // Ključ nije pronađen
-}
-
-// Funkcija za brisanje iz hash tabele
-void delete(HashTable* ht, int key) {
-    int index = search(ht, key);
-    if (index == -1) {
-        printf("Key not found\n");
-        return;
-    }
-    ht->table[index] = -1;
-}
-
-// Glavni program
-int main(void) {
-    HashTable ht;
-    initHashTable(&ht);
-
-    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    // Umetanje elemenata u hash tabelu
-    for (int i = 0; i < n; i++) {
-        insert(&ht, arr[i]);
-    }
-
-    // Prikaz umetnutih elemenata
-    printf("Hash table:\n");
-    for (int i = 0; i < TABLE_SIZE; i++) {
-        if (ht.table[i] != -1) {
-            printf("Index %d: %d\n", i, ht.table[i]);
-        } else {
-            printf("Index %d: EMPTY\n", i);
-        }
-    }
-
-    // Pretraga elemenata u hash tabeli
-    printf("\nPretraga u hash tabeli:\n");
-    for (int i = 0; i < n; i++) {
-        int index = search(&ht, arr[i]);
-        if (index != -1) {
-            printf("Key %d found at index %d\n", arr[i], index);
-        } else {
-            printf("Key %d not found\n", arr[i]);
-        }
-    }
-
-    // Oslobađanje memorije
-    free(ht.table);
-
-    return 0;
-}
-
-
-
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//typedef struct Node{
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//}Node;
+//
+//
+//int main(void){
+//    
+//    return 0;
+//}
