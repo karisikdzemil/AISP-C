@@ -7,9 +7,48 @@ struct node{
     struct node *next;
 };
 
+struct node *AddEmpty(struct node *head, int data){
+    head = malloc(sizeof(struct node));
+    head->prev = NULL;
+    head->data = data;
+    head->next = NULL;
+    
+    return head;
+}
 
+struct node *AddEnd(struct node *head, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next = NULL;
+    struct node *ptr = head;
+    while(ptr->next != NULL){
+        ptr = ptr->next;
+    }
+    ptr->next = temp;
+    temp->prev = ptr;
+    
+    return head;
+}
+void countNode(struct node *head){
+    struct node *ptr = head;
+    int count = 0;
+    while(ptr!= NULL){
+        printf("%d\n", ptr->data);
+        count++;
+        ptr = ptr->next;
+    }
+    printf("Number of nodes is: %d\n", count);
+}
 int main (void){
-    printf("hello world");
+    struct node *head = NULL;
+    
+    head = AddEmpty(head, 23);
+    head = AddEnd(head, 35);
+    head = AddEnd(head, 45);
+    head = AddEnd(head, 65);
+
+    countNode(head);
     return 0;
 }
 
