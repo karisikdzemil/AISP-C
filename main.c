@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
+struct node {
     struct node *prev;
     int data;
     struct node *next;
 };
 
-struct node *AddEmpty(struct node *head, int data){
+struct node *AddEmpty(struct node *head, int data) {
     head = malloc(sizeof(struct node));
     head->prev = NULL;
     head->data = data;
@@ -16,13 +16,13 @@ struct node *AddEmpty(struct node *head, int data){
     return head;
 }
 
-struct node *AddEnd(struct node *head, int data){
+struct node *AddEnd(struct node *head, int data) {
     struct node *temp = malloc(sizeof(struct node));
     temp->prev = NULL;
     temp->data = data;
     temp->next = NULL;
     struct node *ptr = head;
-    while(ptr->next != NULL){
+    while (ptr->next != NULL) {
         ptr = ptr->next;
     }
     ptr->next = temp;
@@ -30,25 +30,55 @@ struct node *AddEnd(struct node *head, int data){
     
     return head;
 }
-void countNode(struct node *head){
+
+struct node *parni(struct node *head) {
+    struct node *temp = NULL;
+    struct node *ptr = head;
+    
+    while (ptr != NULL) {
+        if (ptr->data % 2 == 0) {
+            if (temp == NULL) {
+                temp = AddEmpty(temp, ptr->data);
+            } else {
+                temp = AddEnd(temp, ptr->data);
+            }
+        }
+        ptr = ptr->next;
+    }
+    
+    return temp;
+}
+
+void countNode(struct node *head) {
     struct node *ptr = head;
     int count = 0;
-    while(ptr!= NULL){
+    while (ptr != NULL) {
         printf("%d\n", ptr->data);
         count++;
         ptr = ptr->next;
     }
     printf("Number of nodes is: %d\n", count);
 }
-int main (void){
+
+int main(void) {
     struct node *head = NULL;
     
     head = AddEmpty(head, 23);
-    head = AddEnd(head, 35);
+    head = AddEnd(head, 36);
     head = AddEnd(head, 45);
     head = AddEnd(head, 65);
-
+    head = AddEnd(head, 32);
+    head = AddEnd(head, 76);
+    head = AddEnd(head, 11);
+    
+    printf("Original list:\n");
     countNode(head);
+    
+    head = parni(head);
+    
+    printf("List with even numbers:\n");
+    countNode(head);
+    
     return 0;
 }
 
