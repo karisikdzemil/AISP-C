@@ -1,99 +1,133 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node{
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//void AddEmpty(struct node *head, int data){
+//    head = malloc(sizeof(struct node));
+//    head->prev = NULL;
+//    head->data = data;
+//    head->next = NULL;
+//}
+//void count(struct node *head){
+//    int count = 0;
+//    struct node *ptr = head;
+//    while(ptr!=NULL){
+//        printf("%d\n", ptr->data);
+//        count++;
+//        ptr = ptr->next;
+//    }
+//    printf("Number of nodes is: %d\n", count);
+//}
+//int main (void){
+//    struct node head;
+//    AddEmpty(&head, 23);
+//    count(&head);
+//
+//    return 0;
+//}
 
-#define MAX 100
 
-typedef struct {
-    int front;
-    int items[MAX];
-    int rear;
-} Que;
 
-void init(Que *q) {
-    q->front = -1;
-    q->rear = -1;
-}
-
-bool isEmpty(Que *q) {
-    return q->front == -1 || q->front > q->rear;
-}
-
-bool isFull(Que *q) {
-    return q->rear == MAX - 1;
-}
-
-void sort(Que *q) {
-    for (int i = q->front; i <= q->rear; i++) {
-        for (int j = i + 1; j <= q->rear; j++) {
-            if (q->items[i] < q->items[j]) {
-                int temp = q->items[i];
-                q->items[i] = q->items[j];
-                q->items[j] = temp;
-            }
-        }
-    }
-}
-
-void enque(Que *q, int value) {
-    if (isFull(q)) {
-        printf("Queue is full.\n");
-        return;
-    }
-    if (isEmpty(q)) {
-        q->front = 0;
-    }
-    q->items[++(q->rear)] = value;
-    sort(q);
-}
-
-int deque(Que *q) {
-    if (isEmpty(q)) {
-        printf("Queue is empty.\n");
-        return -1;
-    }
-    int value = q->items[(q->front)++];
-    if (q->front > q->rear) { // Reset queue if all elements are dequeued
-        q->front = -1;
-        q->rear = -1;
-    }
-    return value;
-}
-
-int front(Que *q) {
-    if (isEmpty(q)) {
-        printf("Queue is empty.\n");
-        return -1;
-    }
-    return q->items[q->front];
-}
-
-int main(void) {
-    Que q;
-    init(&q);
-
-    if (isEmpty(&q)) {
-        printf("Queue is empty.\n");
-    }
-
-    enque(&q, 23);
-    enque(&q, 45);
-    enque(&q, 67);
-
-    printf("Front element is %d\n", front(&q));
-
-    printf("Dequeued element is %d\n", deque(&q));
-    printf("Dequeued element is %d\n", deque(&q));
-
-    if (isEmpty(&q)) {
-        printf("Queue is empty.\n");
-    } else {
-        printf("Queue is not empty.\n");
-    }
-
-    return 0;
-}
-
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <stdbool.h>
+//
+//#define MAX 100
+//
+//typedef struct {
+//    int front;
+//    int items[MAX];
+//    int rear;
+//} Que;
+//
+//void init(Que *q) {
+//    q->front = -1;
+//    q->rear = -1;
+//}
+//
+//bool isEmpty(Que *q) {
+//    return q->front == -1 || q->front > q->rear;
+//}
+//
+//bool isFull(Que *q) {
+//    return q->rear == MAX - 1;
+//}
+//
+//void sort(Que *q) {
+//    for (int i = q->front; i <= q->rear; i++) {
+//        for (int j = i + 1; j <= q->rear; j++) {
+//            if (q->items[i] < q->items[j]) {
+//                int temp = q->items[i];
+//                q->items[i] = q->items[j];
+//                q->items[j] = temp;
+//            }
+//        }
+//    }
+//}
+//
+//void enque(Que *q, int value) {
+//    if (isFull(q)) {
+//        printf("Queue is full.\n");
+//        return;
+//    }
+//    if (isEmpty(q)) {
+//        q->front = 0;
+//    }
+//    q->items[++(q->rear)] = value;
+//    sort(q);
+//}
+//
+//int deque(Que *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty.\n");
+//        return -1;
+//    }
+//    int value = q->items[(q->front)++];
+//    if (q->front > q->rear) { // Reset queue if all elements are dequeued
+//        q->front = -1;
+//        q->rear = -1;
+//    }
+//    return value;
+//}
+//
+//int front(Que *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty.\n");
+//        return -1;
+//    }
+//    return q->items[q->front];
+//}
+//
+//int main(void) {
+//    Que q;
+//    init(&q);
+//
+//    if (isEmpty(&q)) {
+//        printf("Queue is empty.\n");
+//    }
+//
+//    enque(&q, 23);
+//    enque(&q, 45);
+//    enque(&q, 67);
+//
+//    printf("Front element is %d\n", front(&q));
+//
+//    printf("Dequeued element is %d\n", deque(&q));
+//    printf("Dequeued element is %d\n", deque(&q));
+//
+//    if (isEmpty(&q)) {
+//        printf("Queue is empty.\n");
+//    } else {
+//        printf("Queue is not empty.\n");
+//    }
+//
+//    return 0;
+//}
+//
 
 //#include <stdio.h>
 //#include <stdlib.h>
