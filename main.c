@@ -31,6 +31,97 @@
 //}
 
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TABLE_SIZE 10
+
+typedef struct {
+    int key;
+    int value;
+} HashItem;
+
+HashItem* hashTable[TABLE_SIZE];
+
+int hashFunction(int key) {
+    return key % TABLE_SIZE;
+}
+
+void initHashTable() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        hashTable[i] = NULL;
+    }
+}
+
+void insert(int key, int value) {
+    int hashIndex = hashFunction(key);
+    int originalIndex = hashIndex;
+    
+    // Linear probing
+    while (hashTable[hashIndex] != NULL && hashTable[hashIndex]->key != key) {
+        hashIndex = (hashIndex + 1) % TABLE_SIZE;
+        
+        // If we loop back to the original index, table is full
+        if (hashIndex == originalIndex) {
+            printf("Hash table is full\n");
+            return;
+        }
+    }
+    
+    if (hashTable[hashIndex] != NULL) {
+        free(hashTable[hashIndex]);
+    }
+    hashTable[hashIndex] = (HashItem*) malloc(sizeof(HashItem));
+    hashTable[hashIndex]->key = key;
+    hashTable[hashIndex]->value = value;
+}
+
+int search(int key) {
+    int hashIndex = hashFunction(key);
+    int originalIndex = hashIndex;
+    
+    while (hashTable[hashIndex] != NULL) {
+        if (hashTable[hashIndex]->key == key) {
+            return hashTable[hashIndex]->value;
+        }
+        
+        hashIndex = (hashIndex + 1) % TABLE_SIZE;
+        
+        if (hashIndex == originalIndex) {
+            break;
+        }
+    }
+    return -1; // Indicates not found
+}
+
+void display() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (hashTable[i] != NULL) {
+            printf("Index %d: Key = %d, Value = %d\n", i, hashTable[i]->key, hashTable[i]->value);
+        } else {
+            printf("Index %d: NULL\n", i);
+        }
+    }
+}
+
+int main() {
+    initHashTable();
+    
+    insert(1, 10);
+    insert(2, 20);
+    insert(12, 30);
+    insert(22, 40);
+    insert(32, 50);
+    
+    display();
+    
+    printf("Value for key 22: %d\n", search(22));
+    printf("Value for key 3: %d\n", search(3));
+    
+    return 0;
+}
+
+
 
 //#include <stdio.h>
 //#include <stdlib.h>
