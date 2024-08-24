@@ -1,5 +1,46 @@
 //#include <stdio.h>
 //#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//
+//// Funkcija za dodavanje prvog elementa u praznu listu
+//struct node *addEmpty(struct node *tail, int data) {
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = temp; // Prev i next pokazivači upućuju na samog sebe
+//    temp->data = data;
+//    temp->next = temp;
+//    tail = temp;
+//    return tail;
+//}
+//
+//// Funkcija za dodavanje elementa na kraj liste
+//struct node *addEnd(struct node *tail, int data) {
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->data = data;
+//
+//    if (tail == NULL) {
+//        // Ako je lista prazna, dodajemo prvi element
+//        return addEmpty(tail, data);
+//    } else {
+//        // Ažuriramo pokazivače za kružnu listu
+//        temp->next = tail->next; // temp.next pokazuje na prvi element
+//        temp->prev = tail;
+//        tail->next->prev = temp; // Prvi element sada pokazuje na novi zadnji element
+//        tail->next = temp;       // Tail.next pokazuje na novi zadnji element
+//        tail = temp;             // Ažuriramo tail na novi zadnji element
+//        return tail;
+//    }
+//}
+//
+//// Funkcija za ispis podataka iz kružne liste
+//void printData(struct node *tail) {
+//    if (tail == NULL) {
+//#include <stdio.h>
+//#include <stdlib.h>
 //#define MAX 100
 //
 //typedef struct {
