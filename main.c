@@ -1,5 +1,70 @@
 //#include <stdio.h>
 //#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, rear;
+//} Que;
+//
+//void init(Que *q) {
+//    q->front = 0;  // Postavljamo front na 0
+//    q->rear = -1;  // Početni rear je -1 jer nema elemenata
+//}
+//
+//int isEmpty(Que *q) {
+//    return q->rear < q->front;  // Proveravamo da li je rear ispred fronta
+//}
+//
+//int isFull(Que *q) {
+//    return q->rear == MAX - 1;  // Proveravamo da li je rear dostigao MAX-1
+//}
+//
+//void enque(Que *q, int value) {
+//    if (isFull(q)) {
+//        printf("Queue is overflow\n");
+//        return;
+//    }
+//    q->items[++(q->rear)] = value;  // Povećavamo rear i dodajemo element
+//}
+//
+//int deque(Que *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is Empty\n");
+//        return -1;
+//    } else {
+//        return q->items[(q->front)++];  // Vraćamo element i povećavamo front
+//    }
+//}
+//
+//int front(Que *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is Empty\n");
+//        return -1;
+//    } else {
+//        return q->items[q->front];  // Vraćamo element sa fronta
+//    }
+//}
+//
+//int main() {
+//    Que q;
+//    init(&q);  // Prosleđivanje pokazivača na Que objekat
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    
+//    printf("Front element: %d\n", front(&q));
+//    
+//    while (!isEmpty(&q)) {
+//        printf("Dequeued: %d\n", deque(&q));  // Ispisujemo i uklanjamo sve elemente
+//    }
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
 //
 //struct node {
 //    struct node *prev;
