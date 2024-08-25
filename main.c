@@ -1,3 +1,118 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+
+typedef struct {
+    int items[MAX];
+    int front, rear;
+} Queue;
+
+void init(Queue *q) {
+    q->front = 0;
+    q->rear = -1;
+}
+
+int isEmpty(Queue *q) {
+    return q->front > q->rear;
+}
+
+int isFull(Queue *q) {
+    return q->rear == MAX - 1;
+}
+
+int enque(Queue *q, int value) {
+    if (isFull(q)) {
+        printf("Queue is full\n");
+        return -1;
+    }
+    q->items[++(q->rear)] = value;
+    return 0;
+}
+
+int deque(Queue *q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+    return q->items[(q->front)++];
+}
+
+int front(Queue *q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+    return q->items[q->front];
+}
+
+int main(void) {
+    Queue q;
+    
+    init(&q);
+    enque(&q, 10);
+    enque(&q, 20);
+    enque(&q, 30);
+    enque(&q, 40);
+    deque(&q);
+    printf("Front item: %d\n", front(&q));
+
+    return 0;
+}
+
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//
+//struct node *addEmpty(struct node *head, int data){
+//    struct node *ptr = malloc(sizeof(struct node));
+//    ptr->prev = NULL;
+//    ptr->data = data;
+//    ptr->next = NULL;
+//    head = ptr;
+//    return head;
+//}
+//struct node *addEnd (struct node *head, int data){
+//    struct node *ptr = malloc(sizeof(struct node));
+//    ptr->prev = NULL;
+//    ptr->data = data;
+//    ptr->next = NULL;
+//    
+//    struct node *temp = head;
+//    while(temp->next != NULL){
+//        temp = temp->next;
+//    }
+//    temp->next = ptr;
+//    ptr->prev = temp;
+//    return head;
+//}
+//
+//void print(struct node *head){
+//    struct node *temp = head;
+//    while(temp != NULL){
+//        printf("%d\n", temp->data);
+//        temp = temp->next;
+//    }
+//}
+//
+//
+//int main(void){
+//    struct node *head = NULL;
+//    
+//    head = addEmpty(head, 10);
+//    head = addEnd(head, 20);
+//    head = addEnd(head, 30);
+//    head = addEnd(head, 40);
+//    print(head);
+//    
+//    return 0;
+//}
+//
 //#include <stdio.h>
 //#include <stdlib.h>
 //
