@@ -1,3 +1,19 @@
+//struct Node {
+//    int data;
+//    struct Node* left;
+//    struct Node* right;
+//};
+//
+//// Note : Unlike other languages, C does not support
+//// Object Oriented Programming. So we need to write
+//// a separat method for create and instance of tree node
+//struct Node* newNode(int item) {
+//    struct Node* temp =
+//       (struct Node*)malloc(sizeof(struct Node));
+//    temp->key = item;
+//    temp->left = temp->right = NULL;
+//    return temp;
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //#define MAX 100
@@ -59,66 +75,66 @@
 //    return 0;
 //}
 //
-#include <stdio.h>
-#include <stdlib.h>
-#define MAX 100
-
-typedef struct {
-    int items[MAX];
-    int front, rear;
-} Queue;
-
-void init(Queue *q) {
-    q->front = 0;
-    q->rear = -1;
-}
-
-int isEmpty(Queue *q) {
-    return q->front > q->rear;
-}
-
-int isFull(Queue *q) {
-    return q->rear == MAX - 1;
-}
-
-int enque(Queue *q, int value) {
-    if (isFull(q)) {
-        printf("Queue is full\n");
-        return -1;
-    }
-    q->items[++(q->rear)] = value;
-    return 0;
-}
-
-int deque(Queue *q) {
-    if (isEmpty(q)) {
-        printf("Queue is empty\n");
-        return -1;
-    }
-    return q->items[(q->front)++];
-}
-
-int front(Queue *q) {
-    if (isEmpty(q)) {
-        printf("Queue is empty\n");
-        return -1;
-    }
-    return q->items[q->front];
-}
-
-int main(void) {
-    Queue q;
-    
-    init(&q);
-    enque(&q, 10);
-    enque(&q, 20);
-    enque(&q, 30);
-    enque(&q, 40);
-    deque(&q);
-    printf("Front item: %d\n", front(&q));
-
-    return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, rear;
+//} Queue;
+//
+//void init(Queue *q) {
+//    q->front = 0;
+//    q->rear = -1;
+//}
+//
+//int isEmpty(Queue *q) {
+//    return q->front > q->rear;
+//}
+//
+//int isFull(Queue *q) {
+//    return q->rear == MAX - 1;
+//}
+//
+//int enque(Queue *q, int value) {
+//    if (isFull(q)) {
+//        printf("Queue is full\n");
+//        return -1;
+//    }
+//    q->items[++(q->rear)] = value;
+//    return 0;
+//}
+//
+//int deque(Queue *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty\n");
+//        return -1;
+//    }
+//    return q->items[(q->front)++];
+//}
+//
+//int front(Queue *q) {
+//    if (isEmpty(q)) {
+//        printf("Queue is empty\n");
+//        return -1;
+//    }
+//    return q->items[q->front];
+//}
+//
+//int main(void) {
+//    Queue q;
+//    
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    deque(&q);
+//    printf("Front item: %d\n", front(&q));
+//
+//    return 0;
+//}
 
 //#include <stdio.h>
 //#include <stdlib.h>
