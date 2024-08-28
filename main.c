@@ -1,3 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definicija strukture za čvor binarnog stabla
+typedef struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+} Node;
+
+// Funkcija za kreiranje novog čvora
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (!newNode) {
+        printf("Memorija nije dostupna!\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Funkcija za umetanje novog čvora u binarno stablo pretrazivanja
+Node* insertNode(Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insertNode(root->left, data);
+    } else {
+        root->right = insertNode(root->right, data);
+    }
+    return root;
+}
+
+// Funkcija za ispis listova binarnog stabla
+void printLeaves(Node* root) {
+    if (root != NULL) {
+        if (root->left == NULL && root->right == NULL) {
+            printf("%d ", root->data);
+        }
+        printLeaves(root->left);
+        printLeaves(root->right);
+    }
+}
+
+// Funkcija za in-order obilazak stabla
+void inOrderTraversal(Node* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);
+        printf("%d ", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+// Funkcija za brisanje stabla
+void deleteTree(Node* root) {
+    if (root != NULL) {
+        deleteTree(root->left);
+        deleteTree(root->right);
+        free(root);
+    }
+}
+
+int main(void) {
+    Node* root = NULL;
+    int values[] = {13, 5, 22, 27, 15, 8, 3, 11};
+    int n = sizeof(values) / sizeof(values[0]);
+
+    // Umetanje čvorova iz niza u binarno stablo
+    for (int i = 0; i < n; i++) {
+        root = insertNode(root, values[i]);
+    }
+
+    // Ispis stabla u in-order režimu (sortirani ispis)
+    printf("In-order obilazak: ");
+    inOrderTraversal(root);
+    printf("\n");
+
+    // Ispis listova stabla
+    printf("Listovi stabla: ");
+    printLeaves(root);
+    printf("\n");
+
+    // Brisanje stabla
+    deleteTree(root);
+
+    return 0;
+}
+
 //struct Node {
 //    int data;
 //    struct Node* left;
