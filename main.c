@@ -1,92 +1,310 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 100
 
-// Definicija strukture za čvor binarnog stabla
-typedef struct Node {
-    int data;
-    struct Node* left;
-    struct Node* right;
-} Node;
+typedef struct{
+    int items[MAX];
+    int top;
+}stack;
 
-// Funkcija za kreiranje novog čvora
-Node* createNode(int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    if (!newNode) {
-        printf("Memorija nije dostupna!\n");
-        exit(1);
-    }
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
+void init(stack *s){
+    s->top = -1;
 }
-
-// Funkcija za umetanje novog čvora u binarno stablo pretrazivanja
-Node* insertNode(Node* root, int data) {
-    if (root == NULL) {
-        return createNode(data);
-    }
-    if (data < root->data) {
-        root->left = insertNode(root->left, data);
-    } else {
-        root->right = insertNode(root->right, data);
-    }
-    return root;
+int isEmpty(stack *s){
+    return s->top == -1;
 }
-
-// Funkcija za ispis listova binarnog stabla
-void printLeaves(Node* root) {
-    if (root != NULL) {
-        if (root->left == NULL && root->right == NULL) {
-            printf("%d ", root->data);
-        }
-        printLeaves(root->left);
-        printLeaves(root->right);
-    }
+int isFull(stack *s){
+    return s->top == MAX -1;
 }
-
-// Funkcija za in-order obilazak stabla
-void inOrderTraversal(Node* root) {
-    if (root != NULL) {
-        inOrderTraversal(root->left);
-        printf("%d ", root->data);
-        inOrderTraversal(root->right);
+void push(stack *s, int value){
+    if(isFull(s)){
+        printf("Stack is full");
+        return;
     }
+    s->items[++(s->top)] = value;
 }
-// Funkcija za brisanje stabla
-void deleteTree(Node* root) {
-    if (root != NULL) {
-        deleteTree(root->left);
-        deleteTree(root->right);
-        free(root);
+int pop(stack *s){
+    if(isEmpty(s)){
+        printf("stack is empty");
+        return -1;
     }
+    return s->items[(s->top)--];
 }
-
-int main(void) {
-    Node* root = NULL;
-    int values[] = {13, 5, 22, 27, 15, 8, 3, 11};
-    int n = sizeof(values) / sizeof(values[0]);
-
-    // Umetanje čvorova iz niza u binarno stablo
-    for (int i = 0; i < n; i++) {
-        root = insertNode(root, values[i]);
+int peek (stack *s){
+     if(isEmpty(s)){
+        printf("stack is empty");
+        return -1;
     }
-
-    // Ispis stabla u in-order režimu (sortirani ispis)
-    printf("In-order obilazak: ");
-    inOrderTraversal(root);
-    printf("\n");
-
-    // Ispis listova stabla
-    printf("Listovi stabla: ");
-    printLeaves(root);
-    printf("\n");
-
-    // Brisanje stabla
-    deleteTree(root);
-
-    return 0;
+    return s->items[s->top];
 }
+int main (void){
+    stack s;
+    init(&s);
+    
+    push(&s, 10);
+    push(&s, 20);
+    push(&s, 30);
+    push(&s, 40);
+    
+    pop(&s);
+    printf("Top element is: %d", peek(&s));
+}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//typedef struct node {
+//    int data;
+//    struct node *left;
+//    struct node *right;
+//} node;
+//
+//// Funkcija za kreiranje novog čvora
+//node *createNode(int data) {
+//    node *newNode = (node *)malloc(sizeof(node));
+//    newNode->left = NULL;
+//    newNode->data = data;
+//    newNode->right = NULL;
+//    return newNode;
+//}
+//
+//// Funkcija za umetanje novog čvora u binarno pretražno stablo (BST)
+//node *insertNode(node *root, int data) {
+//    if (root == NULL) {
+//        return createNode(data); // Ispravljeno: Vraćamo novi čvor
+//    }
+//    if (data <= root->data) {
+//        root->left = insertNode(root->left, data);
+//    } else {
+//        root->right = insertNode(root->right, data);
+//    }
+//    return root;
+//}
+//
+//// Funkcija za ispis listova stabla
+//void listoviStabla(node *root) {
+//    if (root != NULL) {
+//        if (root->left == NULL && root->right == NULL) { // Ispravljeno: Uslov za ispis listova
+//            printf("%d ", root->data);
+//        }
+//        listoviStabla(root->left);
+//        listoviStabla(root->right);
+//    }
+//}
+//
+//void sort(node *root){
+//    if(root != NULL){
+//        sort(root->left);
+//        printf("%d\n", root->data);
+//        sort(root->right);
+//    }
+//}
+//
+//int main(void) {
+//    node *root = NULL;
+//    int values[] = {13, 5, 22, 27, 15, 8, 3, 11};
+//    int n = sizeof(values) / sizeof(values[0]);
+//
+//    // Umetanje elemenata u BST
+//    for (int i = 0; i < n; i++) {
+//        root = insertNode(root, values[i]);
+//    }
+//
+//    // Ispis listova stabla
+//    printf("Listovi stabla su: ");
+//    listoviStabla(root);
+//    printf("\n");
+//    printf("Sortirani niz: ");
+//    sort(root);
+//    printf("\n");
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//typedef struct {
+//    int items[MAX];
+//    int front, tail;
+//}Queue;
+//
+//void init(Queue *q){
+//    q->front = 0;
+//    q->tail = -1;
+//}
+//int isEmpty(Queue *q){
+//    return q->front > q->tail;
+//}
+//int isFull(Queue *q){
+//    return q->tail == MAX-1;
+//}
+//int enque (Queue *q, int value){
+//    if(isFull(q)){
+//        return -1;
+//    }
+//    q->items[++(q->tail)] = value;
+//    return 0;
+//}
+//int deque (Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    return q->items[(q->front)++];
+//}
+//int front(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    return q->items[q->front];
+//}
+//
+//int main(void){
+//    Queue q;
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    printf("%d", deque(&q));
+//    printf("Front item is: %d", front(&q));
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node{
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//struct node *addEmpty(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    head = temp;
+//    return head;
+//}
+//struct node *addNode(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    struct node *ptr = head;
+//    while(ptr->next != NULL){
+//        ptr = ptr->next;
+//    }
+//    ptr->next = temp;
+//    temp->prev = ptr;
+//    return head;
+//}
+//void traverse(struct node *head){
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->next;
+//    }
+//}
+//int main (void){
+//    struct node *head = NULL;
+//    head = addEmpty(head, 10);
+//    head = addNode(head, 20);
+//    head = addNode(head, 30);
+//    head = addNode(head, 40);
+//    head = addNode(head, 50);
+//    traverse(head);
+//}
+//
+//
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//// Definicija strukture za čvor binarnog stabla
+//typedef struct Node {
+//    int data;
+//    struct Node* left;
+//    struct Node* right;
+//} Node;
+//
+//// Funkcija za kreiranje novog čvora
+//Node* createNode(int data) {
+//    Node* newNode = (Node*)malloc(sizeof(Node));
+//    if (!newNode) {
+//        printf("Memorija nije dostupna!\n");
+//        exit(1);
+//    }
+//    newNode->data = data;
+//    newNode->left = NULL;
+//    newNode->right = NULL;
+//    return newNode;
+//}
+//
+//// Funkcija za umetanje novog čvora u binarno stablo pretrazivanja
+//Node* insertNode(Node* root, int data) {
+//    if (root == NULL) {
+//        return createNode(data);
+//    }
+//    if (data < root->data) {
+//        root->left = insertNode(root->left, data);
+//    } else {
+//        root->right = insertNode(root->right, data);
+//    }
+//    return root;
+//}
+//
+//// Funkcija za ispis listova binarnog stabla
+//void printLeaves(Node* root) {
+//    if (root != NULL) {
+//        if (root->left == NULL && root->right == NULL) {
+//            printf("%d ", root->data);
+//        }
+//        printLeaves(root->left);
+//        printLeaves(root->right);
+//    }
+//}
+//
+//// Funkcija za in-order obilazak stabla
+//void inOrderTraversal(Node* root) {
+//    if (root != NULL) {
+//        inOrderTraversal(root->left);
+//        printf("%d ", root->data);
+//        inOrderTraversal(root->right);
+//    }
+//}
+//// Funkcija za brisanje stabla
+//void deleteTree(Node* root) {
+//    if (root != NULL) {
+//        deleteTree(root->left);
+//        deleteTree(root->right);
+//        free(root);
+//    }
+//}
+//    
+//int main(void) {
+//    Node* root = NULL;
+//    int values[] = {13, 5, 22, 27, 15, 8, 3, 11};
+//    int n = sizeof(values) / sizeof(values[0]);
+//
+//    // Umetanje čvorova iz niza u binarno stablo
+//    for (int i = 0; i < n; i++) {
+//        root = insertNode(root, values[i]);
+//    }
+//
+//    // Ispis stabla u in-order režimu (sortirani ispis)
+//    printf("In-order obilazak: ");
+//    inOrderTraversal(root);
+//    printf("\n");
+//
+//    // Ispis listova stabla
+//    printf("Listovi stabla: ");
+//    printLeaves(root);
+//    printf("\n");
+//
+//    // Brisanje stabla
+//    deleteTree(root);
+//
+//    return 0;
+//}
 
 //struct Node {
 //    int data;
