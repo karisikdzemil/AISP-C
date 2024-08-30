@@ -1,54 +1,54 @@
-#include <stdio.h>
-#include <stdlib.h>
-#define MAX 100
-
-typedef struct{
-    int items[MAX];
-    int top;
-}stack;
-
-void init(stack *s){
-    s->top = -1;
-}
-int isEmpty(stack *s){
-    return s->top == -1;
-}
-int isFull(stack *s){
-    return s->top == MAX -1;
-}
-void push(stack *s, int value){
-    if(isFull(s)){
-        printf("Stack is full");
-        return;
-    }
-    s->items[++(s->top)] = value;
-}
-int pop(stack *s){
-    if(isEmpty(s)){
-        printf("stack is empty");
-        return -1;
-    }
-    return s->items[(s->top)--];
-}
-int peek (stack *s){
-     if(isEmpty(s)){
-        printf("stack is empty");
-        return -1;
-    }
-    return s->items[s->top];
-}
-int main (void){
-    stack s;
-    init(&s);
-    
-    push(&s, 10);
-    push(&s, 20);
-    push(&s, 30);
-    push(&s, 40);
-    
-    pop(&s);
-    printf("Top element is: %d", peek(&s));
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int top;
+//}stack;
+//
+//void init(stack *s){
+//    s->top = -1;
+//}
+//int isEmpty(stack *s){
+//    return s->top == -1;
+//}
+//int isFull(stack *s){
+//    return s->top == MAX -1;
+//}
+//void push(stack *s, int value){
+//    if(isFull(s)){
+//        printf("Stack is full");
+//        return;
+//    }
+//    s->items[++(s->top)] = value;
+//}
+//int pop(stack *s){
+//    if(isEmpty(s)){
+//        printf("stack is empty");
+//        return -1;
+//    }
+//    return s->items[(s->top)--];
+//}
+//int peek (stack *s){
+//     if(isEmpty(s)){
+//        printf("stack is empty");
+//        return -1;
+//    }
+//    return s->items[s->top];
+//}
+//int main (void){
+//    stack s;
+//    init(&s);
+//    
+//    push(&s, 10);
+//    push(&s, 20);
+//    push(&s, 30);
+//    push(&s, 40);
+//    
+//    pop(&s);
+//    printf("Top element is: %d", peek(&s));
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //
@@ -120,54 +120,54 @@ int main (void){
 //    return 0;
 //}
 
-//#include <stdio.h>
-//#include <stdlib.h>
-//#define MAX 100
-//typedef struct {
-//    int items[MAX];
-//    int front, tail;
-//}Queue;
-//
-//void init(Queue *q){
-//    q->front = 0;
-//    q->tail = -1;
-//}
-//int isEmpty(Queue *q){
-//    return q->front > q->tail;
-//}
-//int isFull(Queue *q){
-//    return q->tail == MAX-1;
-//}
-//int enque (Queue *q, int value){
-//    if(isFull(q)){
-//        return -1;
-//    }
-//    q->items[++(q->tail)] = value;
-//    return 0;
-//}
-//int deque (Queue *q){
-//    if(isEmpty(q)){
-//        return -1;
-//    }
-//    return q->items[(q->front)++];
-//}
-//int front(Queue *q){
-//    if(isEmpty(q)){
-//        return -1;
-//    }
-//    return q->items[q->front];
-//}
-//
-//int main(void){
-//    Queue q;
-//    init(&q);
-//    enque(&q, 10);
-//    enque(&q, 20);
-//    enque(&q, 30);
-//    enque(&q, 40);
-//    printf("%d", deque(&q));
-//    printf("Front item is: %d", front(&q));
-//}
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+typedef struct {
+    int items[MAX];
+    int front, tail;
+}Queue;
+
+void init(Queue *q){
+    q->front = 0;
+    q->tail = -1;
+}
+int isEmpty(Queue *q){
+    return q->front > q->tail;
+}
+int isFull(Queue *q){
+    return q->tail == MAX-1;
+}
+int enque (Queue *q, int value){
+    if(isFull(q)){
+        return -1;
+    }
+    q->items[++(q->tail)] = value;
+    return 0;
+}
+int deque (Queue *q){
+    if(isEmpty(q)){
+        return -1;
+    }
+    return q->items[(q->front)++];
+}
+int front(Queue *q){
+    if(isEmpty(q)){
+        return -1;
+    }
+    return q->items[q->front];
+}
+
+int main(void){
+    Queue q;
+    init(&q);
+    enque(&q, 10);
+    enque(&q, 20);
+    enque(&q, 30);
+    enque(&q, 40);
+    printf("%d", deque(&q));
+    printf("Front item is: %d", front(&q));
+}
 //#include <stdio.h>
 //#include <stdlib.h>
 //
