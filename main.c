@@ -78,6 +78,83 @@ int main() {
 //#include <stdio.h>
 //#include <stdlib.h>
 //
+//#define SIZE 10
+//
+//// Heš tabela
+//int hashTable[SIZE];
+//
+//// Funkcija za heširanje
+//int hashFunction(int key) {
+//    return key % SIZE;
+//}
+//
+//// Funkcija za umetanje elementa u heš tabelu
+//void insert(int key) {
+//    int index = hashFunction(key);
+//    
+//    // Linearno traženje slobodne lokacije
+//    while (hashTable[index] != -1) {
+//        index = (index + 1) % SIZE;
+//    }
+//    hashTable[index] = key;
+//}
+//
+//// Funkcija za pretragu elementa u heš tabeli
+//int search(int key) {
+//    int index = hashFunction(key);
+//    
+//    // Linearno pretraživanje, uz proveru svih mogućih mesta
+//    while (hashTable[index] != -1) {
+//        if (hashTable[index] == key) {
+//            return index;
+//        }
+//        index = (index + 1) % SIZE;
+//    }
+//    return -1; // Ako element nije pronađen
+//}
+//
+//// Funkcija za ispis tabele
+//void display() {
+//    for (int i = 0; i < SIZE; i++) {
+//        if (hashTable[i] != -1) {
+//            printf("Index %d: %d\n", i, hashTable[i]);
+//        } else {
+//            printf("Index %d: ~\n", i);
+//        }
+//    }
+//}
+//
+//int main() {
+//    // Inicijalizacija heš tabele sa -1 (oznaka da je mesto prazno)
+//    for (int i = 0; i < SIZE; i++) {
+//        hashTable[i] = -1;
+//    }
+//
+//    // Umetanje ključeva
+//    insert(23);
+//    insert(43);
+//    insert(13);
+//    insert(27);
+//    
+//    // Ispis heš tabele
+//    printf("Heš tabela:\n");
+//    display();
+//
+//    // Pretraga ključeva
+//    int key = 43;
+//    int index = search(key);
+//    if (index != -1) {
+//        printf("\nKljuč %d pronađen na indeksu %d.\n", key, index);
+//    } else {
+//        printf("\nKljuč %d nije pronađen u tabeli.\n", key);
+//    }
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
 //struct node{
 //    struct node *prev;
 //    int data;
