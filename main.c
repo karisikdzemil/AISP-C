@@ -1,79 +1,361 @@
+// LINEARNO HESIRANJE
 #include <stdio.h>
-#include <stdlib.h>
+#define MAX 10
 
-#define SIZE 10
-
-// Heš tabela
-int hashTable[SIZE];
-
-// Funkcija za heširanje
-int hashFunction(int key) {
-    return key % SIZE;
+int hashFunction(int key){
+    return key % MAX;
 }
-
-// Funkcija za umetanje elementa u heš tabelu
-void insert(int key) {
-    int index = hashFunction(key);
-    
-    // Linearno traženje slobodne lokacije
-    while (hashTable[index] != -1) {
-        index = (index + 1) % SIZE;
+void insert(int hashTable[], int key){
+    int index = hashTable[key];
+    while(index != 0){
+        index = (index+1) % MAX;
     }
     hashTable[index] = key;
 }
-
-// Funkcija za pretragu elementa u heš tabeli
-int search(int key) {
-    int index = hashFunction(key);
-    
-    // Linearno pretraživanje, uz proveru svih mogućih mesta
-    while (hashTable[index] != -1) {
-        if (hashTable[index] == key) {
-            return index;
-        }
-        index = (index + 1) % SIZE;
-    }
-    return -1; // Ako element nije pronađen
-}
-
-// Funkcija za ispis tabele
-void display() {
-    for (int i = 0; i < SIZE; i++) {
-        if (hashTable[i] != -1) {
-            printf("Index %d: %d\n", i, hashTable[i]);
-        } else {
-            printf("Index %d: ~\n", i);
-        }
+void display(int hashTable[]){
+    for(int i = 0;i<MAX;i++){
+        printf("index: %d: %d\n", i, hashTable[i]);
     }
 }
 
-int main() {
-    // Inicijalizacija heš tabele sa -1 (oznaka da je mesto prazno)
-    for (int i = 0; i < SIZE; i++) {
-        hashTable[i] = -1;
-    }
-
-    // Umetanje ključeva
-    insert(23);
-    insert(43);
-    insert(13);
-    insert(27);
-    
-    // Ispis heš tabele
-    printf("Heš tabela:\n");
-    display();
-
-    // Pretraga ključeva
-    int key = 43;
-    int index = search(key);
-    if (index != -1) {
-        printf("\nKljuč %d pronađen na indeksu %d.\n", key, index);
-    } else {
-        printf("\nKljuč %d nije pronađen u tabeli.\n", key);
-    }
-
-    return 0;
+int main(void){
+    int hashTable[MAX] = {0};
+    hashFunction(10);
+    insert(hashTable, 20);
+    insert(hashTable, 30);
+    insert(hashTable, 40);
+    insert(hashTable, 50);
+    insert(hashTable,60);
+    display(hashTable);
 }
+//#include <stdio.h>
+//#define MAX 10
+//
+//int hashFunction(int key){
+//    return key % MAX;
+//}
+//
+//void insert(int hashTable[], int key) {
+//    int index = hashFunction(key);
+//    hashTable[index] = key;
+//}
+//void display(int hashTable[]){
+//    for(int i = 0; i < MAX; i++){
+//        printf("Index: %d: %d\n", i, hashTable[i]);
+//    }
+//}
+//
+//int main(void){
+//    int hashTable[MAX] = {0};
+//    insert(hashTable, 10);
+//    insert(hashTable, 20);
+//    insert(hashTable, 30);
+//    
+//    display(hashTable);
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, rear;
+//} Deque;
+//
+//void init(Deque *q) {
+//    q->front = -1;
+//    q->rear = -1;
+//}
+//
+//int isEmpty(Deque *q) {
+//    return q->front == -1;
+//}
+//
+//int isFull(Deque *q) {
+//    return (q->front == 0 && q->rear == MAX - 1) || (q->front == q->rear + 1);
+//}
+//
+//int addFront(Deque *q, int value) {
+//    if (isFull(q)) {
+//        return -1; // Deque is full
+//    }
+//    if (q->front == -1) { // First element being added
+//        q->front = 0;
+//        q->rear = 0;
+//    } else if (q->front == 0) {
+//        q->front = MAX - 1; // Wrap around
+//    } else {
+//        q->front--;
+//    }
+//    q->items[q->front] = value;
+//    return 0;
+//}
+//
+//int addRear(Deque *q, int value) {
+//    if (isFull(q)) {
+//        return -1; // Deque is full
+//    }
+//    if (q->rear == -1) { // First element being added
+//        q->front = 0;
+//        q->rear = 0;
+//    } else if (q->rear == MAX - 1) {
+//        q->rear = 0; // Wrap around
+//    } else {
+//        q->rear++;
+//    }
+//    q->items[q->rear] = value;
+//    return 0;
+//}
+//
+//int delFront(Deque *q) {
+//    if (isEmpty(q)) {
+//        return -1; // Deque is empty
+//    }
+//    int value = q->items[q->front];
+//    if (q->front == q->rear) { // Only one element was present
+//        q->front = -1;
+//        q->rear = -1;
+//    } else if (q->front == MAX - 1) {
+//        q->front = 0; // Wrap around
+//    } else {
+//        q->front++;
+//    }
+//    return value;
+//}
+//
+//int delRear(Deque *q) {
+//    if (isEmpty(q)) {
+//        return -1; // Deque is empty
+//    }
+//    int value = q->items[q->rear];
+//    if (q->front == q->rear) { // Only one element was present
+//        q->front = -1;
+//        q->rear = -1;
+//    } else if (q->rear == 0) {
+//        q->rear = MAX - 1; // Wrap around
+//    } else {
+//        q->rear--;
+//    }
+//    return value;
+//}
+//
+//int front(Deque *q) {
+//    if (isEmpty(q)) {
+//        return -1; // Deque is empty
+//    }
+//    return q->items[q->front];
+//}
+//
+//int rear(Deque *q) {
+//    if (isEmpty(q)) {
+//        return -1; // Deque is empty
+//    }
+//    return q->items[q->rear];
+//}
+//
+//int main(void) {
+//    Deque q;
+//    init(&q);
+//    
+//    addRear(&q, 10);
+//    addRear(&q, 20);
+//    addFront(&q, 5);
+//    addRear(&q, 30);
+//
+//    printf("Front element: %d\n", front(&q));  // Output: 5
+//    printf("Rear element: %d\n", rear(&q));    // Output: 30
+//
+//    delFront(&q);
+//    printf("After deletion, front element: %d\n", front(&q));  // Output: 10
+//
+//    delRear(&q);
+//    printf("After deletion, rear element: %d\n", rear(&q));    // Output: 20
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int front, tail;
+//}Queue;
+//
+//void init(Queue *q){
+//    q->front = 0;
+//    q->tail = -1;
+//}
+//int isEmpty(Queue *q){
+//    return q->front > q->tail;
+//}
+//int isFull(Queue *q){
+//    return q->front == MAX-1;
+//}
+//int enque(Queue *q, int value){
+//    if(isFull(q)){
+//        return -1;
+//    }
+//    q->items[++(q->tail)] = value;
+//    return 0;
+//}
+//int deque(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    q->items[(q->front)++];
+//    return 0;
+//}
+//int front(Queue *q){
+//    return q->items[q->front];
+//}
+//int main(void){
+//    Queue q;
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 30);
+//    deque(&q);
+//    printf("%d", front(&q));
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int top;
+//} Stack;
+//
+//void init(Stack *s) {
+//    s->top = -1;
+//}
+//
+//int isEmpty(Stack *s) {
+//    return s->top == -1;
+//}
+//
+//int isFull(Stack *s) {
+//    return s->top == MAX - 1;
+//}
+//
+//int push(Stack *s, int value) {
+//    if (isFull(s)) {
+//        return -1; // Stack is full
+//    }
+//    s->items[++(s->top)] = value; // Increment top and then add value
+//    return 0;
+//}
+//
+//int pop(Stack *s) {
+//    if (isEmpty(s)) {
+//        return -1; // Stack is empty
+//    }
+//    return s->items[(s->top)--]; // Return the top item and then decrement top
+//}
+//
+//int peek(Stack *s) {
+//    if (isEmpty(s)) {
+//        return -1; // Stack is empty
+//    }
+//    return s->items[s->top]; // Return the top item without modifying the stack
+//}
+//
+//int main(void) {
+//    Stack s;
+//    init(&s);
+//    push(&s, 10);
+//    push(&s, 20);
+//    push(&s, 30);
+//    push(&s, 40);
+//    printf("Top element: %d\n", peek(&s));
+//    
+//    // Pop elements to demonstrate functionality
+//    printf("Popped: %d\n", pop(&s));
+//    printf("Popped: %d\n", pop(&s));
+//    printf("Top element after popping: %d\n", peek(&s));
+//
+//    return 0;
+//}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//#define SIZE 10
+//
+//// Heš tabela
+//int hashTable[SIZE];
+//
+//// Funkcija za heširanje
+//int hashFunction(int key) {
+//    return key % SIZE;
+//}
+//
+//// Funkcija za umetanje elementa u heš tabelu
+//void insert(int key) {
+//    int index = hashFunction(key);
+//    
+//    // Linearno traženje slobodne lokacije
+//    while (hashTable[index] != -1) {
+//        index = (index + 1) % SIZE;
+//    }
+//    hashTable[index] = key;
+//}
+//
+//// Funkcija za pretragu elementa u heš tabeli
+//int search(int key) {
+//    int index = hashFunction(key);
+//    
+//    // Linearno pretraživanje, uz proveru svih mogućih mesta
+//    while (hashTable[index] != -1) {
+//        if (hashTable[index] == key) {
+//            return index;
+//        }
+//        index = (index + 1) % SIZE;
+//    }
+//    return -1; // Ako element nije pronađen
+//}
+//
+//// Funkcija za ispis tabele
+//void display() {
+//    for (int i = 0; i < SIZE; i++) {
+//        if (hashTable[i] != -1) {
+//            printf("Index %d: %d\n", i, hashTable[i]);
+//        } else {
+//            printf("Index %d: ~\n", i);
+//        }
+//    }
+//}
+//
+//int main() {
+//    // Inicijalizacija heš tabele sa -1 (oznaka da je mesto prazno)
+//    for (int i = 0; i < SIZE; i++) {
+//        hashTable[i] = -1;
+//    }
+//
+//    // Umetanje ključeva
+//    insert(23);
+//    insert(43);
+//    insert(13);
+//    insert(27);
+//    
+//    // Ispis heš tabele
+//    printf("Heš tabela:\n");
+//    display();
+//
+//    // Pretraga ključeva
+//    int key = 43;
+//    int index = search(key);
+//    if (index != -1) {
+//        printf("\nKljuč %d pronađen na indeksu %d.\n", key, index);
+//    } else {
+//        printf("\nKljuč %d nije pronađen u tabeli.\n", key);
+//    }
+//
+//    return 0;
+//}
 
 //#include <stdio.h>
 //#include <stdlib.h>
