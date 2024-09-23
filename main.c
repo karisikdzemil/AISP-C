@@ -1,33 +1,61 @@
-// LINEARNO HESIRANJE
 #include <stdio.h>
-#define MAX 10
+#include <stdlib.h>
+// GRAF PREKO MATRICE SUSEDSTVA
+#define V 5 // Broj čvorova
 
-int hashFunction(int key){
-    return key % MAX;
-}
-void insert(int hashTable[], int key){
-    int index = hashTable[key];
-    while(index != 0){
-        index = (index+1) % MAX;
-    }
-    hashTable[index] = key;
-}
-void display(int hashTable[]){
-    for(int i = 0;i<MAX;i++){
-        printf("index: %d: %d\n", i, hashTable[i]);
+void printGraph(int graph[V][V]) {
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            printf("%d ", graph[i][j]);
+        }
+        printf("\n");
     }
 }
 
-int main(void){
-    int hashTable[MAX] = {0};
-    hashFunction(10);
-    insert(hashTable, 20);
-    insert(hashTable, 30);
-    insert(hashTable, 40);
-    insert(hashTable, 50);
-    insert(hashTable,60);
-    display(hashTable);
+int main() {
+    // Inicijalizacija matrice susedstva
+    int graph[V][V] = {
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 0, 1},
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 0, 0},
+        {0, 1, 0, 0, 0}
+    };
+
+    printGraph(graph);
+    return 0;
 }
+
+//// LINEARNO HESIRANJE
+//#include <stdio.h>
+//#define MAX 10
+//
+//int hashFunction(int key){
+//    return key % MAX;
+//}
+//void insert(int hashTable[], int key){
+//    int index = hashTable[key];
+//    while(index != 0){
+//        index = (index+1) % MAX;
+//    }
+//    hashTable[index] = key;
+//}
+//void display(int hashTable[]){
+//    for(int i = 0;i<MAX;i++){
+//        printf("index: %d: %d\n", i, hashTable[i]);
+//    }
+//}
+//
+//int main(void){
+//    int hashTable[MAX] = {0};
+//    hashFunction(10);
+//    insert(hashTable, 20);
+//    insert(hashTable, 30);
+//    insert(hashTable, 40);
+//    insert(hashTable, 50);
+//    insert(hashTable,60);
+//    display(hashTable);
+//}
 //#include <stdio.h>
 //#define MAX 10
 //
