@@ -1,30 +1,85 @@
-#include <stdio.h>
-#include <stdlib.h>
-// GRAF PREKO MATRICE SUSEDSTVA
-#define V 5 // Broj čvorova
+//#include <stdio.h>
+//#include <stdlib.h>
+//// GRAF PREKO MATRICE SUSEDSTVA
+//#define V 5 // Broj čvorova
+//
+//void printGraph(int graph[V][V]) {
+//    for (int i = 0; i < V; i++) {
+//        for (int j = 0; j < V; j++) {
+//            printf("%d ", graph[i][j]);
+//        }
+//        printf("\n");
+//    }
+//}
+//
+//int main() {
+//    // Inicijalizacija matrice susedstva
+//    int graph[V][V] = {
+//        {0, 1, 0, 1, 0},
+//        {1, 0, 1, 0, 1},
+//        {0, 1, 0, 1, 0},
+//        {1, 0, 1, 0, 0},
+//        {0, 1, 0, 0, 0}
+//    };
+//
+//    printGraph(graph);
+//    return 0;
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct {
+//    int items[MAX];
+//    int front, tail;
+//}Queue;
+//
+//void init (Queue *q){
+//    q->front = 0;
+//    q->tail = -1;
+//}
+//int isFull(Queue *q){
+//   return q->tail == MAX -1;
+//}
+//int isEmpty(Queue *q){
+//    return q->front > q->tail && q->tail < 0;
+//}
+//int enque(Queue *q, int value){
+//    if(isFull(q)){
+//        return -1;
+//    }
+//    if(value % 2 == 0){
+//        q->items[++(q->tail)] = value;
+//        return 0;
+//    }else{
+//        return -1;
+//    }
+//    
+//}
+//int deque(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    q->items[(q->front)++];
+//    return 0;
+//}
+//int front(Queue *q){
+//    if(isEmpty(q)){
+//    return -1;}
+//    return q->items[q->front];
+//}
+//int main(void){
+//    Queue q;
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    deque(&q);
+//    deque(&q);
+//    printf("%d", front(&q));
+//}
 
-void printGraph(int graph[V][V]) {
-    for (int i = 0; i < V; i++) {
-        for (int j = 0; j < V; j++) {
-            printf("%d ", graph[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-int main() {
-    // Inicijalizacija matrice susedstva
-    int graph[V][V] = {
-        {0, 1, 0, 1, 0},
-        {1, 0, 1, 0, 1},
-        {0, 1, 0, 1, 0},
-        {1, 0, 1, 0, 0},
-        {0, 1, 0, 0, 0}
-    };
-
-    printGraph(graph);
-    return 0;
-}
 
 //// LINEARNO HESIRANJE
 //#include <stdio.h>
@@ -3699,7 +3754,7 @@ int main() {
 //    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
 //    int n = sizeof(arr) / sizeof(arr[0]);
 //    
-//    Node* root = NULL;
+//    Node* root = NULL;    
 //    for (int i = 0; i < n; i++) {
 //        root = insert(root, arr[i]);
 //    }
