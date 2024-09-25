@@ -1,3 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+
+struct node *addEmpty(struct node *head, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next = NULL;
+    head = temp;
+    return head;
+}
+struct node *addEnd(struct node *head, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next = NULL;
+    
+    struct node *ptr = head;
+    while(ptr->next != NULL){
+        ptr = ptr->next;
+    }
+    ptr->next = temp;
+    temp->prev = ptr;
+    return head;
+}
+
+struct node *parni(struct node *head){
+    struct node *newList = NULL;
+    struct node *ptr2 = newList;
+    struct node *ptr = head;
+    while(ptr != NULL){
+        if(ptr->data % 2 == 0){
+           if(newList == NULL){
+               newList = addEmpty(newList, ptr->data);
+           }else{
+               newList = addEnd(newList, ptr->data);
+           }
+        }
+        ptr = ptr->next;
+    }
+    return newList;
+}
+
+void print(struct node *head){
+    struct node *ptr = head;
+    while(ptr != NULL){
+        printf("%d\n", ptr->data);
+        ptr = ptr->next;
+    }
+}
+int main (void){
+    struct node *head = NULL;
+    struct node *parna = NULL;
+    head = addEmpty(head, 2);
+    head = addEnd(head, 5);
+    head = addEnd(head, 8);
+    head = addEnd(head, 1);
+    head = addEnd(head, 9);
+    head = addEnd(head, 14);
+    print(head);
+    parna = parni(head);
+    printf("Parni elementi liste su: \n");
+    print(parna);
+    return 0;
+}
 //#include <stdio.h>
 //#include <stdlib.h>
 //// GRAF PREKO MATRICE SUSEDSTVA
@@ -3754,7 +3825,7 @@
 //    int arr[] = {13, 5, 22, 27, 15, 8, 3, 11};
 //    int n = sizeof(arr) / sizeof(arr[0]);
 //    
-//    Node* root = NULL;    
+//    Node* root = NULL;
 //    for (int i = 0; i < n; i++) {
 //        root = insert(root, arr[i]);
 //    }
