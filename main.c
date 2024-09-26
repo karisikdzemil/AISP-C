@@ -1,74 +1,194 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
-    struct node *prev;
+typedef struct node {
+    struct node *left;
     int data;
-    struct node *next;
-};
+    struct node *right;
+} node;
 
-struct node *addEmpty(struct node *head, int data){
-    struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-    head = temp;
-    return head;
-}
-struct node *addEnd(struct node *head, int data){
-    struct node *temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-    
-    struct node *ptr = head;
-    while(ptr->next != NULL){
-        ptr = ptr->next;
-    }
-    ptr->next = temp;
-    temp->prev = ptr;
-    return head;
+node *create(int data) {
+    node *newNode = malloc(sizeof(node));
+    newNode->left = NULL;
+    newNode->data = data;
+    newNode->right = NULL;
+    return newNode;
 }
 
-struct node *parni(struct node *head){
-    struct node *newList = NULL;
-    struct node *ptr2 = newList;
-    struct node *ptr = head;
-    while(ptr != NULL){
-        if(ptr->data % 2 == 0){
-           if(newList == NULL){
-               newList = addEmpty(newList, ptr->data);
-           }else{
-               newList = addEnd(newList, ptr->data);
-           }
-        }
-        ptr = ptr->next;
+node *insert(node *root, int data) {
+    if (root == NULL) {
+        root = create(data);
+        return root;
     }
-    return newList;
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
 }
 
-void print(struct node *head){
-    struct node *ptr = head;
-    while(ptr != NULL){
-        printf("%d\n", ptr->data);
-        ptr = ptr->next;
+void print(node *root) {
+    if (root == NULL) {
+        return;
     }
+  
+    print(root->left);
+    printf("%d\n", root->data);
+    print(root->right);
 }
-int main (void){
-    struct node *head = NULL;
-    struct node *parna = NULL;
-    head = addEmpty(head, 2);
-    head = addEnd(head, 5);
-    head = addEnd(head, 8);
-    head = addEnd(head, 1);
-    head = addEnd(head, 9);
-    head = addEnd(head, 14);
-    print(head);
-    parna = parni(head);
-    printf("Parni elementi liste su: \n");
-    print(parna);
+int sumTree (node *root){
+    if(root == NULL){
+        return 0;
+    }
+    return sumTree(root->left) + root->data + sumTree(root->right);
+}
+
+int main(void) {
+    node *root = NULL;
+    root = insert(root, 5);
+    root = insert(root, 4);
+    root = insert(root, 6);
+    root = insert(root, 3);
+    root = insert(root, 2);
+    print(root);
+    printf("Zbir stabla je: %d", sumTree(root));
     return 0;
 }
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int front, tail;
+//}Queue;
+//
+//void init(Queue *q){
+//    q->front = 0;
+//    q->tail = -1;
+//}
+//int isFull(Queue *q){
+//    return q->tail == MAX -1;
+//}
+//int isEmpty (Queue *q){
+//    return q->front > q->tail && q->tail < 0;
+//}
+//void sort(Queue *q) {
+//    for (int i = q->front; i < q->tail; i++) {
+//        for (int j = q->front; j < q->tail - (i - q->front); j++) {
+//            if (q->items[j] > q->items[j + 1]) {
+//                int temp = q->items[j];
+//                q->items[j] = q->items[j + 1];
+//                q->items[j + 1] = temp;
+//            }
+//        }
+//    }
+//}
+//int enque(Queue *q, int value){
+//    if(isFull(q)){
+//        return -1;
+//    }
+//    q->items[++(q->tail)] = value;
+//    sort(q);
+//    return 0;
+//}
+//int deque(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    q->items[(q->front)++];
+//    return 0;
+//}
+//
+//
+//int front(Queue *q){
+//    return q->items[(q->front)++];
+//}
+//int main (void){
+//    Queue q;
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    enque(&q, 50);
+//    deque(&q);
+//    deque(&q);
+//    printf("%d", front(&q));
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//
+//struct node *addEmpty(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    head = temp;
+//    return head;
+//}
+//struct node *addEnd(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    
+//    struct node *ptr = head;
+//    while(ptr->next != NULL){
+//        ptr = ptr->next;
+//    }
+//    ptr->next = temp;
+//    temp->prev = ptr;
+//    return head;
+//}
+//
+//struct node *parni(struct node *head){
+//    struct node *newList = NULL;
+//    struct node *ptr2 = newList;
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        if(ptr->data % 2 == 0){
+//           if(newList == NULL){
+//               newList = addEmpty(newList, ptr->data);
+//           }else{
+//               newList = addEnd(newList, ptr->data);
+//           }
+//        }
+//        ptr = ptr->next;
+//    }
+//    return newList;
+//}
+//
+//void print(struct node *head){
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->next;
+//    }
+//}
+//int main (void){
+//    struct node *head = NULL;
+//    struct node *parna = NULL;
+//    head = addEmpty(head, 2);
+//    head = addEnd(head, 5);
+//    head = addEnd(head, 8);
+//    head = addEnd(head, 1);
+//    head = addEnd(head, 9);
+//    head = addEnd(head, 14);
+//    print(head);
+//    parna = parni(head);
+//    printf("Parni elementi liste su: \n");
+//    print(parna);
+//    return 0;
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //// GRAF PREKO MATRICE SUSEDSTVA
