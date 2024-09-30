@@ -1,30 +1,30 @@
-#include <stdio.h>
-#define SIZE 13
-
-void linearHashing(int arr[], int n){
-    int hashTable[SIZE] = {0};
-    
-    for(int i = 0; i < n; i++){
-        int index = arr[i] % SIZE;
-        while(hashTable[index] != 0){
-            index = (index +1) % SIZE;
-        }
-        hashTable[index] = arr[i];
-    }
-    
-    printf("Linear hashing: \n");
-    for(int i = 0; i < SIZE; i++){
-        printf("Index: %d: %d\n", i, hashTable[i]);
-    }
-}
-
-int main(void){
-    int arr[] = {18, 41, 22, 13, 59, 32, 31, 73};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    
-    linearHashing(arr, n);
-    return 0;
-}
+//#include <stdio.h>
+//#define SIZE 13
+//
+//void linearHashing(int arr[], int n){
+//    int hashTable[SIZE] = {0};
+//    
+//    for(int i = 0; i < n; i++){
+//        int index = arr[i] % SIZE;
+//        while(hashTable[index] != 0){
+//            index = (index +1) % SIZE;
+//        }
+//        hashTable[index] = arr[i];
+//    }
+//    
+//    printf("Linear hashing: \n");
+//    for(int i = 0; i < SIZE; i++){
+//        printf("Index: %d: %d\n", i, hashTable[i]);
+//    }
+//}
+//
+//int main(void){
+//    int arr[] = {18, 41, 22, 13, 59, 32, 31, 73};
+//    int n = sizeof(arr) / sizeof(arr[0]);
+//    
+//    linearHashing(arr, n);
+//    return 0;
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //
