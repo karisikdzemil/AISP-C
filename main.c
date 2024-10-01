@@ -1,4 +1,123 @@
 //#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//
+//struct node *addEmpty(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    head = temp;
+//    return head;
+//}
+//struct node *addEnd(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    
+//    struct node *ptr = head;
+//    while(ptr->next != NULL){
+//        ptr = ptr->next;
+//    }
+//    ptr->next = temp;
+//    temp->prev = ptr;
+//    return head;
+//}
+//struct node *parni(struct node *head, struct node *listaParnih){
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        if(ptr->data % 2 == 0){
+//            if(listaParnih == NULL){
+//                listaParnih = addEmpty(listaParnih, ptr->data);
+//            }else{
+//                listaParnih = addEnd(listaParnih, ptr->data);
+//            }
+//        }
+//        ptr = ptr->next;
+//    }
+//    return listaParnih;
+//}
+//void print(struct node *lista){
+//    struct node *ptr = lista;
+//    while(ptr != NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->next;
+//    }
+//    printf("------------------------\n");
+//}
+//
+//int main(void){
+//    struct node *head = NULL;
+//    struct node *listaParnih = NULL;
+//    head = addEmpty(head, 10);
+//    head = addEnd(head, 9);
+//    head = addEnd(head, 8);
+//    head = addEnd(head, 7);
+//    head = addEnd(head, 6);
+//    listaParnih = parni(head, listaParnih);
+//    print(head);
+//    print(listaParnih);
+//    return 0;
+//}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int front, tail;
+//}Queue;
+//
+//void init(Queue *q){
+//    q->front = 0;
+//    q->tail = -1;
+//}
+//int isFull(Queue *q){
+//    return q->tail == MAX-1;
+//}
+//int isEmpty(Queue *q){
+//    return q->tail > q->front && q->tail < 0;
+//}
+//int enque(Queue *q, int value){
+//    if(isFull(q)){
+//        return -1;
+//    }
+//    q->items[++(q->tail)] = value;
+//    return 0;
+//}
+//int deque(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    q->items[(q->front)++];
+//    return 0;
+//}
+//int front(Queue *q){
+//    if(isEmpty(q)){
+//        return -1;
+//    }
+//    return q->items[q->front];
+//}
+//int main(void){
+//    Queue q;
+//    init(&q);
+//    enque(&q, 10);
+//    enque(&q, 20);
+//    enque(&q, 30);
+//    enque(&q, 40);
+//    deque(&q);
+//    deque(&q);
+//    printf("%d", front(&q));
+//    return 0;
+//}
+
+//#include <stdio.h>
 //#define SIZE 13
 //
 //void linearHashing(int arr[], int n){
