@@ -1,3 +1,169 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    struct node *left;
+    int data;
+    struct node *right;
+};
+
+// Funkcija za kreiranje novog čvora sa zadatim podatkom
+struct node *addEmpty(int data) {
+    struct node *temp = malloc(sizeof(struct node));
+    temp->left = NULL;
+    temp->data = data;  // Popravljena greška (umesto `temp->data - data`, koristi se `=`)
+    temp->right = NULL;
+    return temp;
+}
+
+// Funkcija za umetanje čvora u stablo
+struct node *insert(struct node *root, int data) {
+    if (root == NULL) {
+        return addEmpty(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data >= root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Funkcija za računanje zbira svih elemenata stabla
+int zbir(struct node *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    return root->data + zbir(root->left) + zbir(root->right);
+}
+
+int main(void) {
+    struct node *root = NULL;
+    root = insert(root, 18);
+    root = insert(root, 10);
+    root = insert(root, 20);
+
+    printf("Suma stabla je: %d\n", zbir(root));
+
+    return 0;
+}
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct node {
+//    struct node *prev;
+//    int data;
+//    struct node *next;
+//};
+//struct node *addEmpty(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    head = temp;
+//    return head;
+//}
+//struct node *addEnd(struct node *head, int data){
+//    struct node *temp = malloc(sizeof(struct node ));
+//    temp->prev = NULL;
+//    temp->data = data;
+//    temp->next = NULL;
+//    
+//    struct node *ptr = head;
+//    while(ptr->next != NULL){
+//        ptr = ptr->next;
+//    }
+//    ptr->next = temp;
+//    temp->prev = ptr;
+//    return head;
+//}
+//void print(struct node *head){
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        printf("%d\n", ptr->data);
+//        ptr = ptr->next;
+//    }
+//    printf("-------------------\n");
+//}
+//struct node *newList(struct node *head, struct node *listaPar){
+//    struct node *ptr = head;
+//    while(ptr != NULL){
+//        if(ptr->data % 2 == 0){
+//            if(listaPar == NULL){
+//                listaPar = addEmpty(listaPar, ptr->data);
+//            }else{
+//                listaPar = addEnd(listaPar, ptr->data);
+//            }
+//        }
+//        ptr = ptr->next;
+//    }
+//    return listaPar;
+//}
+//int main(void){
+//    struct node *head = NULL;
+//    struct node *listaPar = NULL;
+//    head = addEmpty(head, 10);
+//    head = addEnd(head, 7);
+//    head = addEnd(head, 8);
+//    head = addEnd(head, 3);
+//    head = addEnd(head, 16);
+//    listaPar = newList(head, listaPar);
+//    print(head);
+//    print(listaPar);
+//    return 0;
+//}
+//#include <stdio.h>
+//#define MAX 100
+//
+//typedef struct{
+//    int items[MAX];
+//    int top;
+//}Stack;
+//
+//void init(Stack *s){
+//    s->top = -1;
+//}
+//int isFull(Stack *s){
+//    return s->top == MAX-1;
+//}
+//int isEmpty(Stack *s){
+//    return s->top < 0;
+//}
+//int push(Stack *s, int value){
+//    if(isFull(s)){
+//        return -1;
+//    }
+//    s->items[++(s->top)] = value;
+//    return 0;
+//}
+//int pop(Stack *s){
+//    if(isEmpty(s)){
+//        return -1;
+//    }
+//    s->items[(s->top)--];
+//    return 0;
+//}
+//int peek(Stack *s){
+//    if(isEmpty(s)){
+//        return -1;
+//    }
+//    return s->items[s->top];
+//}
+//
+//int main(void){
+//    Stack s;
+//    init(&s);
+//    push(&s, 10);
+//    push(&s, 20);
+//    push(&s, 30);
+//    push(&s, 40);
+//    pop(&s);
+//    printf("%d", peek(&s));
+//    pop(&s);
+//    printf("%d", peek(&s));
+//    return 0;
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //
