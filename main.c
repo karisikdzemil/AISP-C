@@ -1,48 +1,48 @@
-#include <stdio.h>
-#define MAX 100
-
-int unos(int n, int graph[MAX][MAX]){
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n ; j++){
-            printf("Unesi elemet i = %d j =%d\n", i, j);
-            scanf("%d", &graph[i][j]);
-        }
-    }
-    return graph[MAX][MAX];
-}
-int preobrazaj(int n, int graph[MAX][MAX]){
-    for(int i = 0; i<n; i++){
-        for(int j = 0; j < n ; j++){
-            if(graph[i][j] != 0){
-                graph[i][j] = 1;
-            }else{
-                graph[i][j] = 0;
-            }
-        }
-    }
-    return graph[MAX][MAX];
-}
-void print(int n,int graph[MAX][MAX]){
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            printf("%d", graph[i][j]);
-        }
-        printf("\n");
-    }
-    printf("-------------------\n");
-}
-
-int main(void){
-    int graph[MAX][MAX];
-    int n = 0;
-    printf("unesi n: ");
-    scanf("%d", &n);
-    unos(n, graph);
-    print(n, graph);
-    preobrazaj(n, graph);
-    print(n, graph);
-    return 0;
-}
+//#include <stdio.h>
+//#define MAX 100
+//
+//int unos(int n, int graph[MAX][MAX]){
+//    for(int i = 0; i < n; i++){
+//        for(int j = 0; j < n ; j++){
+//            printf("Unesi elemet i = %d j =%d\n", i, j);
+//            scanf("%d", &graph[i][j]);
+//        }
+//    }
+//    return graph[MAX][MAX];
+//}
+//int preobrazaj(int n, int graph[MAX][MAX]){
+//    for(int i = 0; i<n; i++){
+//        for(int j = 0; j < n ; j++){
+//            if(graph[i][j] != 0){
+//                graph[i][j] = 1;
+//            }else{
+//                graph[i][j] = 0;
+//            }
+//        }
+//    }
+//    return graph[MAX][MAX];
+//}
+//void print(int n,int graph[MAX][MAX]){
+//    for(int i = 0; i < n; i++){
+//        for(int j = 0; j < n; j++){
+//            printf("%d", graph[i][j]);
+//        }
+//        printf("\n");
+//    }
+//    printf("-------------------\n");
+//}
+//
+//int main(void){
+//    int graph[MAX][MAX];
+//    int n = 0;
+//    printf("unesi n: ");
+//    scanf("%d", &n);
+//    unos(n, graph);
+//    print(n, graph);
+//    preobrazaj(n, graph);
+//    print(n, graph);
+//    return 0;
+//}
 //#include <stdio.h>
 //#include <stdlib.h>
 //#define MAX 100
