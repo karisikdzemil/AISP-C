@@ -1,4 +1,70 @@
 //#include <stdio.h>
+//#define SIZE 17
+//
+//int hashFunc(int key){
+//    return key % SIZE;
+//}
+//int insert(int key, int hashTable[SIZE]){
+//    int index = hashFunc(key);
+//    if(hashTable[index] == 0){
+//        hashTable[index] = key;
+//    }
+//    return hashTable[SIZE];
+//}
+//void display(int hashTable[SIZE]){
+//    for(int i = 0; i < SIZE; i++){
+//        printf("%d\n", hashTable[i]);
+//    }
+//}
+//int search(int key, int hashTable[SIZE]){
+//    int index = hashFunc(key);
+//    if(key == hashTable[index]){
+//        return index;
+//    }
+//}
+//int main(void){
+//    int hashTable[SIZE] = {0};
+//    insert(10, hashTable);
+//    insert(9, hashTable);
+//    insert(2, hashTable);
+//    display(hashTable);
+//    printf("%d", search(2, hashTable));
+//    return 0;
+//}
+#include <stdio.h>
+#define SIZE 17
+
+int hashFunc(int key){
+    return key % SIZE;
+}
+int insert(int hashTable[SIZE], int key){
+    int index = hashFunc(key);
+    if(hashTable[index] == 0){
+        hashTable[index] = key;
+    }else{
+        while(hashTable[index] != 0){
+            index = index + 1;
+        }
+        hashTable[index] = key;
+    }
+}
+void display(int hashTable[SIZE]){
+    for(int i = 0; i < SIZE; i++){
+        printf("%d\n", hashTable[i]);
+    }
+}
+int main(void){
+    int hashTable[SIZE] = {0};
+    insert(hashTable, 19);
+    insert(hashTable, 10);
+    insert(hashTable, 8);
+    insert(hashTable, 17);
+    insert(hashTable, 34);
+    display(hashTable);
+    return 0;
+    
+}
+//#include <stdio.h>
 //#define MAX 100
 //
 //int unos(int n, int graph[MAX][MAX]){
