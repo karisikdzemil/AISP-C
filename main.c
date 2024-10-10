@@ -4712,3 +4712,54 @@
 //    
 //    return 0;
 //}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+
+struct node *addEmpty(struct node *head, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next = NULL;
+    
+    head = temp;
+    return head;
+}
+struct node *addEnd(struct node *head, int data){
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = data;
+    temp->next = NULL;
+    
+    struct node *ptr = head;
+    while(ptr->next != NULL){
+        ptr = ptr->next;
+    }
+    ptr->next = temp;
+    temp->prev = ptr;
+    return head;
+}
+
+void print(struct node *head){
+    struct node *ptr = head;
+    while(ptr != NULL){
+        printf("%d\n", ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+int main(void){
+    struct node *head = NULL;
+    head = addEmpty(head, 10);
+    head = addEnd(head, 20);
+    head = addEnd(head, 30);
+    head = addEnd(head, 40);
+    print(head);
+    return 0;
+}
